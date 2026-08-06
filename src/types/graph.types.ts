@@ -125,6 +125,9 @@ export interface PdnEdgeData extends Record<string, unknown> {
   maxCurrentA: number; // I_max
   lengthKm?: number;
   result?: EdgeResult;
+  /** Manual color override set by the user, independent of solve status.
+   *  When unset, the edge falls back to status-derived coloring. */
+  color?: string;
 }
 
 export type PdnNode = Node<PdnNodeData, ComponentType>;

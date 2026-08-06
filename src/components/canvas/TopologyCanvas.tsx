@@ -1,10 +1,11 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   ReactFlow,
+  ReactFlowProvider,
   Background,
   Controls,
   MiniMap,
-  addEdge,
+  useReactFlow,
   applyNodeChanges,
   applyEdgeChanges,
   type Connection,
@@ -15,9 +16,13 @@ import '@xyflow/react/dist/style.css';
 
 import { nodeTypes } from '../nodes';
 import { edgeTypes } from '../edges/PowerLineEdge';
+import { NodePalette } from './NodePalette';
+import { NodeInspectorPanel } from './NodeInspectorPanel';
 import { validateGraph, type ValidationIssue } from '../../utils/graphValidation';
 import { mockSolve } from '../../utils/mockSolver';
+import { defaultParamsFor, TYPE_LABELS } from '../../utils/nodeDefaults';
 import {
+  ComponentType,
   SolveStatus,
   type OptimizationResult,
   type PdnEdge,
@@ -31,17 +36,28 @@ interface TopologyCanvasProps {
   onSelectionChange?: (selection: { nodes: PdnNode[]; edges: PdnEdge[] }) => void;
 }
 
+/** Generates a short, collision-resistant id without pulling in a uuid dep. */
+function makeId(prefix: string): string {
+  return `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
 /**
  * Interactive Topology Canvas (/canvas) — fully standalone.
  * No backend calls: "Run Optimization" runs `mockSolve` synchronously in
  * the browser so the canvas, overlay coloring, and result summary are all
  * demoable without a FastAPI/docplex server running.
+ *
+ * Wrapped in `ReactFlowProvider` (see the default export below) so the
+ * click-to-place add-node flow can use `useReactFlow().screenToFlowPosition`
+ * from a sibling of <ReactFlow>, not just from inside it.
  */
-export const TopologyCanvas: React.FC<TopologyCanvasProps> = ({
+const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
   initialNodes,
   initialEdges,
   onSelectionChange,
 }) => {
+  const { screenToFlowPosition } = useReactFlow();
+
   const [nodes, setNodes] = useState<PdnNode[]>(initialNodes);
   const [edges, setEdges] = useState<PdnEdge[]>(
     initialEdges.map((e) => ({ ...e, type: e.type ?? 'powerLine' }))
@@ -49,6 +65,10 @@ export const TopologyCanvas: React.FC<TopologyCanvasProps> = ({
   const [isSolving, setIsSolving] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [lastResult, setLastResult] = useState<OptimizationResult | null>(null);
+  const [inspectorNodeId, setInspectorNodeId] = useState<string | null>(null);
+  // When set, the next click on empty canvas places a node of this type
+  // instead of just deselecting everything.
+  const [pendingNodeType, setPendingNodeType] = useState<ComponentType | null>(null);
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds) as PdnNode[]),
@@ -60,24 +80,115 @@ export const TopologyCanvas: React.FC<TopologyCanvasProps> = ({
     []
   );
 
-  const onConnect = useCallback(
-    (connection: Connection) =>
-      setEdges(
-        (eds) =>
-          addEdge(
-            {
-              ...connection,
-              type: 'powerLine',
-              data: {
-                resistanceOhm: 0.1,
-                reactanceOhm: 0.1,
-                maxCurrentA: 400,
-              },
-            },
-            eds
-          ) as PdnEdge[]
-      ),
+  const onConnect = useCallback((connection: Connection) => {
+    // Build the edge manually with a guaranteed-unique id (rather than
+    // relying on the `addEdge` helper's derived id) so multiple parallel
+    // lines between the same two nodes — or several lines fanning out from
+    // one node — are always added instead of silently deduped.
+    const newEdge: PdnEdge = {
+      id: makeId('edge'),
+      source: connection.source,
+      target: connection.target,
+      sourceHandle: connection.sourceHandle,
+      targetHandle: connection.targetHandle,
+      type: 'powerLine',
+      data: {
+        resistanceOhm: 0.1,
+        reactanceOhm: 0.1,
+        maxCurrentA: 400,
+      },
+    };
+    setEdges((eds) => [...eds, newEdge]);
+  }, []);
+
+  // Blocks a node from being wired to itself while dragging a new
+  // connection; everything else — including multiple lines between the
+  // same two nodes, or many lines fanning out of one node — is allowed.
+  const isValidConnection = useCallback(
+    (connection: Connection) => connection.source !== connection.target,
     []
+  );
+
+  /** Arms/disarms "click to place" mode for the given type. Clicking the
+   *  already-armed type again cancels it. */
+  const handleSelectPaletteType = useCallback((type: ComponentType) => {
+    setPendingNodeType((current) => (current === type ? null : type));
+  }, []);
+
+  const addNodeAt = useCallback((type: ComponentType, position: { x: number; y: number }) => {
+    setNodes((nds) => {
+      const countOfType = nds.filter((n) => n.data.componentType === type).length;
+      const newNode: PdnNode = {
+        id: makeId(type),
+        type,
+        position,
+        data: {
+          label: `${TYPE_LABELS[type]} ${countOfType + 1}`,
+          componentType: type,
+          params: defaultParamsFor(type),
+        },
+      };
+      return [...nds, newNode];
+    });
+  }, []);
+
+  /** Click on empty canvas: if a palette type is armed, place a node there
+   *  (converting the screen click position into canvas/flow coordinates);
+   *  otherwise this is just a normal deselect-click. */
+  const handlePaneClick = useCallback(
+    (event: React.MouseEvent) => {
+      if (!pendingNodeType) return;
+      const position = screenToFlowPosition({ x: event.clientX, y: event.clientY });
+      addNodeAt(pendingNodeType, position);
+      setPendingNodeType(null);
+    },
+    [pendingNodeType, screenToFlowPosition, addNodeAt]
+  );
+
+  // Esc cancels an armed placement without requiring a click on the canvas.
+  useEffect(() => {
+    if (!pendingNodeType) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setPendingNodeType(null);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [pendingNodeType]);
+
+  // The node currently open in the inspector sidebar, re-derived from
+  // `nodes` on every render so edits (and deletions) stay in sync — no
+  // separate "editing copy" of the node to drift out of date.
+  const inspectorNode = useMemo(
+    () => nodes.find((n) => n.id === inspectorNodeId) ?? null,
+    [nodes, inspectorNodeId]
+  );
+
+  const handleNodeDoubleClick = useCallback((_event: React.MouseEvent, node: PdnNode) => {
+    setInspectorNodeId(node.id);
+  }, []);
+
+  const handleChangeNodeLabel = useCallback(
+    (label: string) => {
+      if (!inspectorNodeId) return;
+      setNodes((nds) =>
+        nds.map((n) => (n.id === inspectorNodeId ? { ...n, data: { ...n.data, label } } : n))
+      );
+    },
+    [inspectorNodeId]
+  );
+
+  const handleChangeNodeParam = useCallback(
+    (key: string, value: number | boolean | undefined) => {
+      if (!inspectorNodeId) return;
+      setNodes((nds) =>
+        nds.map((n) =>
+          n.id === inspectorNodeId
+            ? { ...n, data: { ...n.data, params: { ...n.data.params, [key]: value } } }
+            : n
+        )
+      );
+    },
+    [inspectorNodeId]
   );
 
   /** Merges an OptimizationResult into node/edge `data.result` so the
@@ -156,15 +267,46 @@ export const TopologyCanvas: React.FC<TopologyCanvasProps> = ({
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        isValidConnection={isValidConnection}
         onSelectionChange={(sel) =>
           onSelectionChange?.({ nodes: sel.nodes as PdnNode[], edges: sel.edges as PdnEdge[] })
         }
+        onNodeDoubleClick={handleNodeDoubleClick}
+        onPaneClick={handlePaneClick}
+        deleteKeyCode={['Backspace', 'Delete']}
+        style={{ cursor: pendingNodeType ? 'crosshair' : undefined }}
         fitView
       >
         <Background gap={16} />
         <Controls />
         <MiniMap pannable zoomable />
       </ReactFlow>
+
+      <NodePalette activeType={pendingNodeType} onSelectType={handleSelectPaletteType} />
+
+      {pendingNodeType && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 rounded-md bg-indigo-600 text-white shadow px-3 py-1.5 text-xs font-medium">
+          Click on the canvas to place a {TYPE_LABELS[pendingNodeType]} · Esc to cancel
+        </div>
+      )}
+
+      {inspectorNode && (
+        <NodeInspectorPanel
+          node={inspectorNode}
+          onClose={() => setInspectorNodeId(null)}
+          onChangeLabel={handleChangeNodeLabel}
+          onChangeParam={handleChangeNodeParam}
+        />
+      )}
+
+      {!errorMessage && (
+        <div className="absolute bottom-4 left-4 max-w-xs rounded-md bg-white/90 border border-slate-200 shadow px-3 py-1.5 text-[11px] text-slate-500">
+          Pick a type in "Add node" then click the canvas to place it · drag
+          between dots to connect nodes (any node can have many connections)
+          · click a line to recolor or delete it · double-click a node to
+          edit its properties.
+        </div>
+      )}
 
       <div className="absolute top-4 right-4 flex flex-col items-end gap-2">
         <button
@@ -199,3 +341,13 @@ export const TopologyCanvas: React.FC<TopologyCanvasProps> = ({
     </div>
   );
 };
+
+/** Public export — wraps the canvas in its own ReactFlowProvider so it can
+ *  be dropped anywhere without the parent needing to set one up. If you
+ *  already wrap your app in a ReactFlowProvider elsewhere, this nested one
+ *  is harmless (xyflow supports nested providers). */
+export const TopologyCanvas: React.FC<TopologyCanvasProps> = (props) => (
+  <ReactFlowProvider>
+    <TopologyCanvasInner {...props} />
+  </ReactFlowProvider>
+);
