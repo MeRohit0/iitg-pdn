@@ -105,7 +105,7 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
   // connection; everything else — including multiple lines between the
   // same two nodes, or many lines fanning out of one node — is allowed.
   const isValidConnection = useCallback(
-    (connection: Connection) => connection.source !== connection.target,
+    (connection: Connection | PdnEdge) => connection.source !== connection.target,
     []
   );
 
@@ -201,10 +201,16 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
       }))
     );
     setEdges((eds) =>
-      eds.map((e) => ({
-        ...e,
-        data: { ...e.data, result: result.edgeResults[e.id] },
-      }))
+      eds.map((e) => {
+        if (!e.data) return e;
+        return {
+          ...e,
+          data: {
+            ...e.data,
+            result: result.edgeResults[e.id],
+          },
+        };
+      })
     );
   }, []);
 

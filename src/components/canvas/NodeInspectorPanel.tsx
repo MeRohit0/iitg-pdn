@@ -65,7 +65,7 @@ export const NodeInspectorPanel: React.FC<NodeInspectorPanelProps> = ({
   onChangeParam,
 }) => {
   const type = node.data.componentType;
-  const params = node.data.params as Record<string, unknown>;
+  const params = node.data.params as unknown as Record<string, unknown>;
   const fields = [...COMMON_FIELDS, ...TYPE_FIELDS[type]];
   const result = node.data.result;
 

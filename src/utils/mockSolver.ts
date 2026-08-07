@@ -111,15 +111,17 @@ export function mockSolve(nodes: PdnNode[], edges: PdnEdge[]): OptimizationResul
     if (edgeId && parentId) {
       const edge = edges.find((e) => e.id === edgeId)!;
       const flowMw = downstreamDemandMw.get(id) ?? 0;
-      const iMaxA = edge.data.maxCurrentA || 400;
+      const iMaxA = edge.data?.maxCurrentA ?? 400;
+      const resistanceOhm = edge.data?.resistanceOhm ?? 0;
+      
       const capacityMw = (Math.sqrt(3) * baseKv * iMaxA) / 1000;
       const loadingPct = capacityMw > 0 ? Math.round((flowMw / capacityMw) * 1000) / 10 : 0;
       const currentA = (flowMw * 1000) / (Math.sqrt(3) * baseKv || 1);
-      const lossMw = (currentA * currentA * edge.data.resistanceOhm) / 1_000_000;
+      const lossMw = (currentA * currentA * resistanceOhm) / 1_000_000;
       totalLossMw += lossMw;
 
       const parentVoltage = voltagePu.get(parentId) ?? 1.0;
-      const voltageDropPu = (edge.data.resistanceOhm * flowMw) / (baseKv * baseKv || 1) * 0.02;
+      const voltageDropPu = (resistanceOhm * flowMw) / (baseKv * baseKv || 1) * 0.02;
       const thisVoltage = Math.max(0.85, parentVoltage - voltageDropPu);
       voltagePu.set(id, thisVoltage);
 
