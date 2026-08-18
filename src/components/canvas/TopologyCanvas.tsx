@@ -5,6 +5,7 @@ import {
   Background,
   Controls,
   MiniMap,
+  ConnectionMode,
   useReactFlow,
   applyNodeChanges,
   applyEdgeChanges,
@@ -18,14 +19,19 @@ import { nodeTypes } from '../nodes';
 import { edgeTypes } from '../edges/PowerLineEdge';
 import { NodePalette } from './NodePalette';
 import { NodeInspectorPanel } from './NodeInspectorPanel';
+import { EdgeInspectorPanel } from './EdgeInspectorPanel';
+import { GraphIOPanel } from './GraphIOPanel';
 import { validateGraph, type ValidationIssue } from '../../utils/graphValidation';
 import { mockSolve } from '../../utils/mockSolver';
 import { defaultParamsFor, TYPE_LABELS } from '../../utils/nodeDefaults';
+import { clearPersistedGraph, loadPersistedGraph, savePersistedGraph } from '../../utils/graphPersistence';
 import {
   ComponentType,
   SolveStatus,
+  type ComponentParams,
   type OptimizationResult,
   type PdnEdge,
+  type PdnEdgeData,
   type PdnNode,
 } from '../../types/graph.types';
 
@@ -40,6 +46,25 @@ interface TopologyCanvasProps {
 function makeId(prefix: string): string {
   return `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 }
+
+/** Every node now exposes 4 side-handles (top/right/bottom/left, see
+ *  FourSideHandles), each with its own id — so an edge that doesn't specify
+ *  which handle it uses is ambiguous and may not render correctly. New
+ *  connections drawn on the canvas always carry the specific handle the
+ *  user dragged from/to, but edges coming from elsewhere (a localStorage
+ *  save made before this change, or graph data provided by the parent)
+ *  might not. This backfills a safe default so nothing silently breaks. */
+function normalizeEdgeHandles(edge: PdnEdge): PdnEdge {
+  return {
+    ...edge,
+    type: edge.type ?? 'powerLine',
+    sourceHandle: edge.sourceHandle ?? 'bottom',
+    targetHandle: edge.targetHandle ?? 'top',
+  };
+}
+
+/** Which element (if any) the right-hand sidebar is currently showing. */
+type InspectorTarget = { kind: 'node'; id: string } | { kind: 'edge'; id: string } | null;
 
 /**
  * Interactive Topology Canvas (/canvas) — fully standalone.
@@ -56,19 +81,26 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
   initialEdges,
   onSelectionChange,
 }) => {
-  const { screenToFlowPosition } = useReactFlow();
+  const { screenToFlowPosition, fitView } = useReactFlow();
 
-  const [nodes, setNodes] = useState<PdnNode[]>(initialNodes);
+  // On first mount, prefer whatever was last saved to localStorage over the
+  // demo topology passed in via props — that's what makes the canvas
+  // survive a page reload. `initialNodes`/`initialEdges` only apply on a
+  // genuinely fresh browser (nothing saved yet) or after an explicit Reset.
+  const persisted = useMemo(() => loadPersistedGraph(), []);
+
+  const [nodes, setNodes] = useState<PdnNode[]>(persisted?.nodes ?? initialNodes);
   const [edges, setEdges] = useState<PdnEdge[]>(
-    initialEdges.map((e) => ({ ...e, type: e.type ?? 'powerLine' }))
+    (persisted?.edges ?? initialEdges).map(normalizeEdgeHandles)
   );
   const [isSolving, setIsSolving] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [lastResult, setLastResult] = useState<OptimizationResult | null>(null);
-  const [inspectorNodeId, setInspectorNodeId] = useState<string | null>(null);
+  const [inspectorTarget, setInspectorTarget] = useState<InspectorTarget>(null);
   // When set, the next click on empty canvas places a node of this type
   // instead of just deselecting everything.
   const [pendingNodeType, setPendingNodeType] = useState<ComponentType | null>(null);
+  const [isIOPanelOpen, setIsIOPanelOpen] = useState(false);
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds) as PdnNode[]),
@@ -81,10 +113,10 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
   );
 
   const onConnect = useCallback((connection: Connection) => {
-    // Build the edge manually with a guaranteed-unique id (rather than
-    // relying on the `addEdge` helper's derived id) so multiple parallel
-    // lines between the same two nodes — or several lines fanning out from
-    // one node — are always added instead of silently deduped.
+    // Built manually with a guaranteed-unique id (rather than relying on
+    // the `addEdge` helper's derived id) so multiple parallel lines between
+    // the same two nodes — or several fanning out from one node — are
+    // always added instead of silently deduped.
     const newEdge: PdnEdge = {
       id: makeId('edge'),
       source: connection.source,
@@ -104,6 +136,9 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
   // Blocks a node from being wired to itself while dragging a new
   // connection; everything else — including multiple lines between the
   // same two nodes, or many lines fanning out of one node — is allowed.
+  // xyflow calls this with either a fresh `Connection` (mid-drag) or an
+  // existing `PdnEdge` (re-validating), so the parameter type has to cover
+  // both — narrowing it to just `Connection` fails the prop's type check.
   const isValidConnection = useCallback(
     (connection: Connection | PdnEdge) => connection.source !== connection.target,
     []
@@ -155,40 +190,137 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [pendingNodeType]);
 
-  // The node currently open in the inspector sidebar, re-derived from
-  // `nodes` on every render so edits (and deletions) stay in sync — no
-  // separate "editing copy" of the node to drift out of date.
+  // Autosave: every change to the graph is written to localStorage so a
+  // page reload (or reopening the tab later) picks up right where you left
+  // off. Cheap enough at this scale to just save on every change rather
+  // than debouncing.
+  useEffect(() => {
+    savePersistedGraph(nodes, edges);
+  }, [nodes, edges]);
+
+  const handleResetToDemo = useCallback(() => {
+    const confirmed = window.confirm(
+      'Reset the canvas to the default demo topology? This clears your saved layout.'
+    );
+    if (!confirmed) return;
+    clearPersistedGraph();
+    setNodes(initialNodes);
+    setEdges(initialEdges.map(normalizeEdgeHandles));
+    setInspectorTarget(null);
+    setLastResult(null);
+    setErrorMessage(null);
+  }, [initialNodes, initialEdges]);
+
+  /** Replaces the whole canvas with an imported graph. The imported data is
+   *  already validated/normalized by GraphIOPanel before this runs — this
+   *  just applies it and re-frames the view, since an imported layout can
+   *  have wildly different coordinates than whatever was on screen before.
+   *  Autosave (the effect below) picks it up automatically, same as any
+   *  other edit — no separate "persist" step needed. */
+  const handleImportGraph = useCallback(
+    (importedNodes: PdnNode[], importedEdges: PdnEdge[]) => {
+      setNodes(importedNodes);
+      setEdges(importedEdges.map(normalizeEdgeHandles));
+      setInspectorTarget(null);
+      setLastResult(null);
+      setErrorMessage(null);
+      setPendingNodeType(null);
+      // Let the new nodes commit to the DOM before asking React Flow to
+      // measure and fit them into view.
+      requestAnimationFrame(() => fitView({ padding: 0.2, duration: 300 }));
+    },
+    [fitView]
+  );
+
+  // The node/edge currently open in the sidebar, re-derived from live state
+  // on every render so edits (and deletions) stay in sync automatically.
   const inspectorNode = useMemo(
-    () => nodes.find((n) => n.id === inspectorNodeId) ?? null,
-    [nodes, inspectorNodeId]
+    () =>
+      inspectorTarget?.kind === 'node'
+        ? nodes.find((n) => n.id === inspectorTarget.id) ?? null
+        : null,
+    [nodes, inspectorTarget]
+  );
+
+  const inspectorEdge = useMemo(
+    () =>
+      inspectorTarget?.kind === 'edge'
+        ? edges.find((e) => e.id === inspectorTarget.id) ?? null
+        : null,
+    [edges, inspectorTarget]
   );
 
   const handleNodeDoubleClick = useCallback((_event: React.MouseEvent, node: PdnNode) => {
-    setInspectorNodeId(node.id);
+    setInspectorTarget({ kind: 'node', id: node.id });
+  }, []);
+
+  const handleEdgeDoubleClick = useCallback((_event: React.MouseEvent, edge: PdnEdge) => {
+    setInspectorTarget({ kind: 'edge', id: edge.id });
   }, []);
 
   const handleChangeNodeLabel = useCallback(
     (label: string) => {
-      if (!inspectorNodeId) return;
-      setNodes((nds) =>
-        nds.map((n) => (n.id === inspectorNodeId ? { ...n, data: { ...n.data, label } } : n))
-      );
+      if (inspectorTarget?.kind !== 'node') return;
+      const id = inspectorTarget.id;
+      setNodes((nds) => nds.map((n) => (n.id === id ? { ...n, data: { ...n.data, label } } : n)));
     },
-    [inspectorNodeId]
+    [inspectorTarget]
   );
 
   const handleChangeNodeParam = useCallback(
     (key: string, value: number | boolean | undefined) => {
-      if (!inspectorNodeId) return;
+      if (inspectorTarget?.kind !== 'node') return;
+      const id = inspectorTarget.id;
       setNodes((nds) =>
         nds.map((n) =>
-          n.id === inspectorNodeId
-            ? { ...n, data: { ...n.data, params: { ...n.data.params, [key]: value } } }
+          n.id === id
+            ? {
+                ...n,
+                data: {
+                  ...n.data,
+                  params: { ...n.data.params, [key]: value } as ComponentParams,
+                },
+              }
             : n
         )
       );
     },
-    [inspectorNodeId]
+    [inspectorTarget]
+  );
+
+  const handleChangeEdgeLabel = useCallback(
+    (label: string) => {
+      if (inspectorTarget?.kind !== 'edge') return;
+      const id = inspectorTarget.id;
+      setEdges((eds) =>
+        eds.map((e) => (e.id === id ? { ...e, data: { ...e.data, label } as PdnEdgeData } : e))
+      );
+    },
+    [inspectorTarget]
+  );
+
+  const handleChangeEdgeField = useCallback(
+    (key: string, value: number | undefined) => {
+      if (inspectorTarget?.kind !== 'edge') return;
+      const id = inspectorTarget.id;
+      setEdges((eds) =>
+        eds.map((e) =>
+          e.id === id ? { ...e, data: { ...e.data, [key]: value } as PdnEdgeData } : e
+        )
+      );
+    },
+    [inspectorTarget]
+  );
+
+  const handleChangeEdgeColor = useCallback(
+    (color: string | undefined) => {
+      if (inspectorTarget?.kind !== 'edge') return;
+      const id = inspectorTarget.id;
+      setEdges((eds) =>
+        eds.map((e) => (e.id === id ? { ...e, data: { ...e.data, color } as PdnEdgeData } : e))
+      );
+    },
+    [inspectorTarget]
   );
 
   /** Merges an OptimizationResult into node/edge `data.result` so the
@@ -201,16 +333,10 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
       }))
     );
     setEdges((eds) =>
-      eds.map((e) => {
-        if (!e.data) return e;
-        return {
-          ...e,
-          data: {
-            ...e.data,
-            result: result.edgeResults[e.id],
-          },
-        };
-      })
+      eds.map((e) => ({
+        ...e,
+        data: { ...e.data, result: result.edgeResults[e.id] } as PdnEdgeData,
+      }))
     );
   }, []);
 
@@ -263,6 +389,16 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
     );
   }, [lastResult]);
 
+  const inspectorEdgeSourceLabel = useMemo(() => {
+    if (!inspectorEdge) return '';
+    return nodes.find((n) => n.id === inspectorEdge.source)?.data.label ?? inspectorEdge.source;
+  }, [inspectorEdge, nodes]);
+
+  const inspectorEdgeTargetLabel = useMemo(() => {
+    if (!inspectorEdge) return '';
+    return nodes.find((n) => n.id === inspectorEdge.target)?.data.label ?? inspectorEdge.target;
+  }, [inspectorEdge, nodes]);
+
   return (
     <div className="relative h-full w-full">
       <ReactFlow<PdnNode, PdnEdge>
@@ -274,10 +410,12 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         isValidConnection={isValidConnection}
+        connectionMode={ConnectionMode.Loose}
         onSelectionChange={(sel) =>
           onSelectionChange?.({ nodes: sel.nodes as PdnNode[], edges: sel.edges as PdnEdge[] })
         }
         onNodeDoubleClick={handleNodeDoubleClick}
+        onEdgeDoubleClick={handleEdgeDoubleClick}
         onPaneClick={handlePaneClick}
         deleteKeyCode={['Backspace', 'Delete']}
         style={{ cursor: pendingNodeType ? 'crosshair' : undefined }}
@@ -299,33 +437,72 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
       {inspectorNode && (
         <NodeInspectorPanel
           node={inspectorNode}
-          onClose={() => setInspectorNodeId(null)}
+          onClose={() => setInspectorTarget(null)}
           onChangeLabel={handleChangeNodeLabel}
           onChangeParam={handleChangeNodeParam}
+        />
+      )}
+
+      {inspectorEdge && (
+        <EdgeInspectorPanel
+          edge={inspectorEdge}
+          sourceLabel={inspectorEdgeSourceLabel}
+          targetLabel={inspectorEdgeTargetLabel}
+          onClose={() => setInspectorTarget(null)}
+          onChangeLabel={handleChangeEdgeLabel}
+          onChangeField={handleChangeEdgeField}
+          onChangeColor={handleChangeEdgeColor}
+        />
+      )}
+
+      {isIOPanelOpen && (
+        <GraphIOPanel
+          nodes={nodes}
+          edges={edges}
+          onImport={handleImportGraph}
+          onClose={() => setIsIOPanelOpen(false)}
         />
       )}
 
       {!errorMessage && (
         <div className="absolute bottom-4 left-4 max-w-xs rounded-md bg-white/90 border border-slate-200 shadow px-3 py-1.5 text-[11px] text-slate-500">
           Pick a type in "Add node" then click the canvas to place it · drag
-          between dots to connect nodes (any node can have many connections)
-          · click a line to recolor or delete it · double-click a node to
-          edit its properties.
+          between dots to connect nodes · click a line to delete it ·
+          double-click a node or line to edit its properties (including
+          line color).
         </div>
       )}
 
       <div className="absolute top-4 right-4 flex flex-col items-end gap-2">
-        <button
-          type="button"
-          onClick={handleSolve}
-          disabled={isSolving}
-          className="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-indigo-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
-        >
-          {isSolving && (
-            <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white/40 border-t-white" />
-          )}
-          {isSolving ? 'Solving…' : 'Run Optimization'}
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setIsIOPanelOpen(true)}
+            title="Export the current graph to JSON, or load one in"
+            className="rounded-md border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-500 shadow hover:bg-slate-50 transition-colors"
+          >
+            Import / Export
+          </button>
+          <button
+            type="button"
+            onClick={handleResetToDemo}
+            title="Clear saved layout and restore the default demo topology"
+            className="rounded-md border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-500 shadow hover:bg-slate-50 transition-colors"
+          >
+            Reset
+          </button>
+          <button
+            type="button"
+            onClick={handleSolve}
+            disabled={isSolving}
+            className="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-indigo-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+          >
+            {isSolving && (
+              <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white/40 border-t-white" />
+            )}
+            {isSolving ? 'Solving…' : 'Run Optimization'}
+          </button>
+        </div>
         {summaryChips}
       </div>
 

@@ -46,6 +46,10 @@ const TYPE_FIELDS: Record<ComponentType, FieldDescriptor[]> = {
     { key: 'isCritical', label: 'Critical load', type: 'checkbox' },
   ],
   [ComponentType.FEEDER]: [],
+  [ComponentType.NODE]: [
+    { key: 'activePowerMw', label: 'Active power (P)', type: 'number', unit: 'MW', step: 0.1 },
+    { key: 'reactivePowerMvar', label: 'Reactive power (Q)', type: 'number', unit: 'MVAr', step: 0.1 },
+  ],
 };
 
 interface NodeInspectorPanelProps {
@@ -66,7 +70,12 @@ export const NodeInspectorPanel: React.FC<NodeInspectorPanelProps> = ({
 }) => {
   const type = node.data.componentType;
   const params = node.data.params as unknown as Record<string, unknown>;
-  const fields = [...COMMON_FIELDS, ...TYPE_FIELDS[type]];
+  // The generic compact Node intentionally shows only its own fields
+  // (active/reactive power) — no voltage — keeping it to exactly the two
+  // properties it's meant for. Every other type still gets the common
+  // voltage fields plus its own.
+  const fields =
+    type === ComponentType.NODE ? TYPE_FIELDS[type] : [...COMMON_FIELDS, ...TYPE_FIELDS[type]];
   const result = node.data.result;
 
   return (

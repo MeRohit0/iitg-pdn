@@ -6,6 +6,7 @@ export const TYPE_LABELS: Record<ComponentType, string> = {
   [ComponentType.GENERATOR]: 'Generator',
   [ComponentType.LOAD]: 'Load',
   [ComponentType.FEEDER]: 'Feeder',
+  [ComponentType.NODE]: 'Node',
 };
 
 export const TYPE_ICONS: Record<ComponentType, string> = {
@@ -14,6 +15,7 @@ export const TYPE_ICONS: Record<ComponentType, string> = {
   [ComponentType.GENERATOR]: '⚡',
   [ComponentType.LOAD]: '🏠',
   [ComponentType.FEEDER]: '◆',
+  [ComponentType.NODE]: '●',
 };
 
 /** Tailwind text/border color pairing, matches the accent used by each
@@ -24,6 +26,7 @@ export const TYPE_ACCENT_CLASS: Record<ComponentType, string> = {
   [ComponentType.GENERATOR]: 'text-emerald-600 border-emerald-600',
   [ComponentType.LOAD]: 'text-rose-600 border-rose-500',
   [ComponentType.FEEDER]: 'text-slate-500 border-slate-400',
+  [ComponentType.NODE]: 'text-slate-900 border-slate-900',
 };
 
 /** Sensible starting parameters for a freshly-dropped node of each type.
@@ -47,6 +50,8 @@ export function defaultParamsFor(type: ComponentType): ComponentParams {
       return { baseVoltageKv: 0.4, pDemandMw: 1, qDemandMvar: 0.2 };
     case ComponentType.FEEDER:
       return { baseVoltageKv: 0.4 };
+    case ComponentType.NODE:
+      return { baseVoltageKv: 0.4, activePowerMw: 0, reactivePowerMvar: 0 };
     default:
       return { baseVoltageKv: 11 };
   }

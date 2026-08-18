@@ -1,7 +1,8 @@
 /**
  * Project-PDN — Core domain types for the Power Distribution Network canvas.
- * These types mirror (and must stay in sync with) the backend Pydantic
- * models in `backend/app/models/schemas.py`.
+ * This is the single source of truth for the app's data shape: React state
+ * in TopologyCanvas, localStorage persistence, and JSON import/export all
+ * operate directly on PdnNode[]/PdnEdge[] as defined here.
  */
 
 import type { Node, Edge } from '@xyflow/react';
@@ -16,6 +17,7 @@ export enum ComponentType {
   FEEDER = 'feeder',
   GENERATOR = 'generator', // MEG / DG unit
   LOAD = 'load',
+  NODE = 'node', // generic compact bus — rendered as a small dot, not a card
 }
 
 export enum LineStatus {
@@ -79,12 +81,22 @@ export interface FeederParams extends BaseElectricalParams {
   // beyond voltage limits, kept for extensibility.
 }
 
+/** Generic compact bus/junction — for dense networks where drawing every
+ *  point as a full labeled card (Substation/Transformer/etc.) would make
+ *  the canvas unreadable at scale (e.g. 30+ nodes). Rendered as a small
+ *  dot; carries just net active/reactive power and voltage. */
+export interface GenericNodeParams extends BaseElectricalParams {
+  activePowerMw?: number; // net injection (+) or draw (-)
+  reactivePowerMvar?: number; // net injection (+) or draw (-)
+}
+
 export type ComponentParams =
   | SubstationParams
   | TransformerParams
   | GeneratorParams
   | LoadParams
-  | FeederParams;
+  | FeederParams
+  | GenericNodeParams;
 
 // ---------------------------------------------------------------------------
 // Result payloads (populated after a solve, used to drive overlay styling)
@@ -134,27 +146,8 @@ export type PdnNode = Node<PdnNodeData, ComponentType>;
 export type PdnEdge = Edge<PdnEdgeData>;
 
 // ---------------------------------------------------------------------------
-// API payload contracts
+// Solve results
 // ---------------------------------------------------------------------------
-
-export interface GraphPayload {
-  scenarioName?: string;
-  nodes: PdnNode[];
-  edges: PdnEdge[];
-}
-
-export interface ValidationIssue {
-  severity: 'error' | 'warning';
-  code: string; // e.g. "ORPHAN_NODE", "NO_SLACK_BUS"
-  message: string;
-  nodeId?: string;
-  edgeId?: string;
-}
-
-export interface ValidationResponse {
-  isValid: boolean;
-  issues: ValidationIssue[];
-}
 
 export interface SolveSummary {
   status: SolveStatus;
@@ -170,22 +163,4 @@ export interface OptimizationResult {
   summary: SolveSummary;
   nodeResults: Record<string, NodeResult>; // keyed by React Flow node id
   edgeResults: Record<string, EdgeResult>; // keyed by React Flow edge id
-}
-
-// ---------------------------------------------------------------------------
-// Scenario persistence
-// ---------------------------------------------------------------------------
-
-export interface ScenarioSummary {
-  id: string;
-  name: string;
-  description?: string;
-  createdAt: string;
-  updatedAt: string;
-  tags?: string[];
-}
-
-export interface Scenario extends ScenarioSummary {
-  graph: GraphPayload;
-  lastResult?: OptimizationResult;
 }

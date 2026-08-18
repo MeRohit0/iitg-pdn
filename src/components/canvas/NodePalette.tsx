@@ -8,6 +8,7 @@ const PALETTE_TYPES: ComponentType[] = [
   ComponentType.GENERATOR,
   ComponentType.LOAD,
   ComponentType.FEEDER,
+  ComponentType.NODE,
 ];
 
 interface NodePaletteProps {

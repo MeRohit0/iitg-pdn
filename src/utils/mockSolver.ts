@@ -18,6 +18,23 @@ function statusFromLoading(loadingPct: number): LineStatus {
   return LineStatus.NORMAL;
 }
 
+/** Net demand this node draws from the network for flow-aggregation
+ *  purposes: positive means it consumes power, negative means it injects.
+ *  Loads report their fixed demand directly; the generic compact Node type
+ *  reports the negative of its net active power (a positive P there means
+ *  it's injecting, which offsets downstream demand the same way a small
+ *  generator would). */
+function nodeOwnDemandMw(n: PdnNode): number {
+  if (n.data.componentType === ComponentType.LOAD) {
+    return (n.data.params as { pDemandMw?: number }).pDemandMw ?? 0;
+  }
+  if (n.data.componentType === ComponentType.NODE) {
+    const p = (n.data.params as { activePowerMw?: number }).activePowerMw ?? 0;
+    return -p;
+  }
+  return 0;
+}
+
 /**
  * Approximates a radial power flow entirely in the browser: for each branch,
  * sums the demand of every downstream load reachable through it (BFS from
@@ -80,10 +97,7 @@ export function mockSolve(nodes: PdnNode[], edges: PdnEdge[]): OptimizationResul
   for (let i = order.length - 1; i >= 0; i--) {
     const id = order[i];
     const n = nodeById.get(id)!;
-    const ownDemand =
-      n.data.componentType === ComponentType.LOAD
-        ? (n.data.params as { pDemandMw?: number }).pDemandMw ?? 0
-        : 0;
+    const ownDemand = nodeOwnDemandMw(n);
     let total = ownDemand;
     for (const { neighborId } of adjacency.get(id) ?? []) {
       if (parentNode.get(neighborId) === id) {
@@ -104,24 +118,26 @@ export function mockSolve(nodes: PdnNode[], edges: PdnEdge[]): OptimizationResul
     const edgeId = parentEdge.get(id);
     const parentId = parentNode.get(id);
 
-    if (n.data.componentType === ComponentType.LOAD) {
-      totalDemandMw += (n.data.params as { pDemandMw?: number }).pDemandMw ?? 0;
-    }
+    // Only count net-positive draw toward the reported system demand —
+    // a Node with negative activePowerMw (net injection) isn't "demand".
+    totalDemandMw += Math.max(0, nodeOwnDemandMw(n));
 
     if (edgeId && parentId) {
       const edge = edges.find((e) => e.id === edgeId)!;
+      // `edge.data` is typed optional by xyflow's base Edge<T> (data?: T),
+      // even though every edge this app creates always has one. Default to
+      // the same fallbacks used when the field is present-but-unset.
+      const edgeData = edge.data ?? { resistanceOhm: 0.1, maxCurrentA: 400 };
       const flowMw = downstreamDemandMw.get(id) ?? 0;
-      const iMaxA = edge.data?.maxCurrentA ?? 400;
-      const resistanceOhm = edge.data?.resistanceOhm ?? 0;
-      
+      const iMaxA = edgeData.maxCurrentA || 400;
       const capacityMw = (Math.sqrt(3) * baseKv * iMaxA) / 1000;
       const loadingPct = capacityMw > 0 ? Math.round((flowMw / capacityMw) * 1000) / 10 : 0;
       const currentA = (flowMw * 1000) / (Math.sqrt(3) * baseKv || 1);
-      const lossMw = (currentA * currentA * resistanceOhm) / 1_000_000;
+      const lossMw = (currentA * currentA * edgeData.resistanceOhm) / 1_000_000;
       totalLossMw += lossMw;
 
       const parentVoltage = voltagePu.get(parentId) ?? 1.0;
-      const voltageDropPu = (resistanceOhm * flowMw) / (baseKv * baseKv || 1) * 0.02;
+      const voltageDropPu = (edgeData.resistanceOhm * flowMw) / (baseKv * baseKv || 1) * 0.02;
       const thisVoltage = Math.max(0.85, parentVoltage - voltageDropPu);
       voltagePu.set(id, thisVoltage);
 
@@ -145,8 +161,13 @@ export function mockSolve(nodes: PdnNode[], edges: PdnEdge[]): OptimizationResul
           ? Math.round((downstreamDemandMw.get(id) ?? 0) * 1000) / 1000
           : n.data.componentType === ComponentType.GENERATOR
           ? (n.data.params as { pMaxMw?: number }).pMaxMw ?? 0
+          : n.data.componentType === ComponentType.NODE
+          ? (n.data.params as { activePowerMw?: number }).activePowerMw ?? 0
           : 0,
-      qInjectionMvar: 0,
+      qInjectionMvar:
+        n.data.componentType === ComponentType.NODE
+          ? (n.data.params as { reactivePowerMvar?: number }).reactivePowerMvar ?? 0
+          : 0,
       isEnergized: true,
     };
   }
