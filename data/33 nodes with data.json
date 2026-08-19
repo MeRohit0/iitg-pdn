@@ -1,0 +1,1119 @@
+{
+  "nodes": [
+    {
+      "id": "bus1",
+      "type": "substation",
+      "position": {
+        "x": 0,
+        "y": 260
+      },
+      "data": {
+        "label": "1",
+        "componentType": "substation",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "isSlackBus": true,
+          "activePowerMw": 0,
+          "reactivePowerMvar": 0
+        }
+      },
+      "measured": {
+        "width": 30,
+        "height": 80
+      }
+    },
+    {
+      "id": "bus2",
+      "type": "node",
+      "position": {
+        "x": 110,
+        "y": 260
+      },
+      "data": {
+        "label": "2",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 100,
+          "reactivePowerMvar": 60
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      },
+      "selected": false
+    },
+    {
+      "id": "bus3",
+      "type": "node",
+      "position": {
+        "x": 220,
+        "y": 260
+      },
+      "data": {
+        "label": "3",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 90,
+          "reactivePowerMvar": 40
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus4",
+      "type": "node",
+      "position": {
+        "x": 330,
+        "y": 260
+      },
+      "data": {
+        "label": "4",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 120,
+          "reactivePowerMvar": 80
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus5",
+      "type": "node",
+      "position": {
+        "x": 330,
+        "y": 130
+      },
+      "data": {
+        "label": "5",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 60,
+          "reactivePowerMvar": 30
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus6",
+      "type": "node",
+      "position": {
+        "x": 440,
+        "y": 130
+      },
+      "data": {
+        "label": "6",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 60,
+          "reactivePowerMvar": 20
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus7",
+      "type": "node",
+      "position": {
+        "x": 440,
+        "y": 260
+      },
+      "data": {
+        "label": "7",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 200,
+          "reactivePowerMvar": 100
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus8",
+      "type": "node",
+      "position": {
+        "x": 550,
+        "y": 260
+      },
+      "data": {
+        "label": "8",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 200,
+          "reactivePowerMvar": 100
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus9",
+      "type": "node",
+      "position": {
+        "x": 660,
+        "y": 260
+      },
+      "data": {
+        "label": "9",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 60,
+          "reactivePowerMvar": 20
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus10",
+      "type": "node",
+      "position": {
+        "x": 770,
+        "y": 260
+      },
+      "data": {
+        "label": "10",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 60,
+          "reactivePowerMvar": 20
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus11",
+      "type": "node",
+      "position": {
+        "x": 880,
+        "y": 260
+      },
+      "data": {
+        "label": "11",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 45,
+          "reactivePowerMvar": 30
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus12",
+      "type": "node",
+      "position": {
+        "x": 880,
+        "y": 390
+      },
+      "data": {
+        "label": "12",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 60,
+          "reactivePowerMvar": 35
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus13",
+      "type": "node",
+      "position": {
+        "x": 990,
+        "y": 390
+      },
+      "data": {
+        "label": "13",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 60,
+          "reactivePowerMvar": 35
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus14",
+      "type": "node",
+      "position": {
+        "x": 990,
+        "y": 260
+      },
+      "data": {
+        "label": "14",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 120,
+          "reactivePowerMvar": 80
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus15",
+      "type": "node",
+      "position": {
+        "x": 1100,
+        "y": 260
+      },
+      "data": {
+        "label": "15",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 60,
+          "reactivePowerMvar": 10
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus16",
+      "type": "node",
+      "position": {
+        "x": 1100,
+        "y": 390
+      },
+      "data": {
+        "label": "16",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 60,
+          "reactivePowerMvar": 20
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus17",
+      "type": "node",
+      "position": {
+        "x": 1210,
+        "y": 390
+      },
+      "data": {
+        "label": "17",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 60,
+          "reactivePowerMvar": 20
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus18",
+      "type": "node",
+      "position": {
+        "x": 1210,
+        "y": 260
+      },
+      "data": {
+        "label": "18",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 90,
+          "reactivePowerMvar": 40
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus19",
+      "type": "node",
+      "position": {
+        "x": 110,
+        "y": 390
+      },
+      "data": {
+        "label": "19",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 90,
+          "reactivePowerMvar": 40
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus20",
+      "type": "node",
+      "position": {
+        "x": 220,
+        "y": 390
+      },
+      "data": {
+        "label": "20",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 90,
+          "reactivePowerMvar": 40
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus21",
+      "type": "node",
+      "position": {
+        "x": 330,
+        "y": 390
+      },
+      "data": {
+        "label": "21",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 90,
+          "reactivePowerMvar": 40
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus22",
+      "type": "node",
+      "position": {
+        "x": 440,
+        "y": 390
+      },
+      "data": {
+        "label": "22",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 90,
+          "reactivePowerMvar": 40
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus23",
+      "type": "node",
+      "position": {
+        "x": 220,
+        "y": 0
+      },
+      "data": {
+        "label": "23",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 90,
+          "reactivePowerMvar": 50
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus24",
+      "type": "node",
+      "position": {
+        "x": 330,
+        "y": 0
+      },
+      "data": {
+        "label": "24",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 420,
+          "reactivePowerMvar": 200
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus25",
+      "type": "node",
+      "position": {
+        "x": 440,
+        "y": 0
+      },
+      "data": {
+        "label": "25",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 420,
+          "reactivePowerMvar": 200
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus26",
+      "type": "node",
+      "position": {
+        "x": 550,
+        "y": 130
+      },
+      "data": {
+        "label": "26",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 60,
+          "reactivePowerMvar": 25
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus27",
+      "type": "node",
+      "position": {
+        "x": 660,
+        "y": 130
+      },
+      "data": {
+        "label": "27",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 60,
+          "reactivePowerMvar": 25
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus28",
+      "type": "node",
+      "position": {
+        "x": 770,
+        "y": 130
+      },
+      "data": {
+        "label": "28",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 60,
+          "reactivePowerMvar": 20
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus29",
+      "type": "node",
+      "position": {
+        "x": 770,
+        "y": 0
+      },
+      "data": {
+        "label": "29",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 120,
+          "reactivePowerMvar": 70
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus30",
+      "type": "node",
+      "position": {
+        "x": 880,
+        "y": 0
+      },
+      "data": {
+        "label": "30",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 200,
+          "reactivePowerMvar": 600
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus31",
+      "type": "node",
+      "position": {
+        "x": 990,
+        "y": 0
+      },
+      "data": {
+        "label": "31",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 150,
+          "reactivePowerMvar": 70
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus32",
+      "type": "node",
+      "position": {
+        "x": 1100,
+        "y": 0
+      },
+      "data": {
+        "label": "32",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 210,
+          "reactivePowerMvar": 100
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "id": "bus33",
+      "type": "node",
+      "position": {
+        "x": 1210,
+        "y": 0
+      },
+      "data": {
+        "label": "33",
+        "componentType": "node",
+        "params": {
+          "baseVoltageKv": 12.66,
+          "activePowerMw": 60,
+          "reactivePowerMvar": 40
+        }
+      },
+      "measured": {
+        "width": 44,
+        "height": 44
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1-2",
+      "source": "bus1",
+      "target": "bus2",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.0922,
+        "reactanceOhm": 0.047,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-2-3",
+      "source": "bus2",
+      "target": "bus3",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.493,
+        "reactanceOhm": 0.2512,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-3-4",
+      "source": "bus3",
+      "target": "bus4",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.3661,
+        "reactanceOhm": 0.1864,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-4-5",
+      "source": "bus4",
+      "target": "bus5",
+      "sourceHandle": "top",
+      "targetHandle": "bottom",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.3811,
+        "reactanceOhm": 0.1941,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-5-6",
+      "source": "bus5",
+      "target": "bus6",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.819,
+        "reactanceOhm": 0.707,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-6-7",
+      "source": "bus6",
+      "target": "bus7",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.1872,
+        "reactanceOhm": 0.6188,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-7-8",
+      "source": "bus7",
+      "target": "bus8",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.7115,
+        "reactanceOhm": 0.2351,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-8-9",
+      "source": "bus8",
+      "target": "bus9",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 1.0299,
+        "reactanceOhm": 0.74,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-9-10",
+      "source": "bus9",
+      "target": "bus10",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 1.044,
+        "reactanceOhm": 0.74,
+        "maxCurrentA": 400
+      },
+      "selected": true
+    },
+    {
+      "id": "edge-10-11",
+      "source": "bus10",
+      "target": "bus11",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.1967,
+        "reactanceOhm": 0.0651,
+        "maxCurrentA": 400,
+        "color": "#8395af"
+      }
+    },
+    {
+      "id": "edge-11-12",
+      "source": "bus11",
+      "target": "bus12",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.3744,
+        "reactanceOhm": 0.1298,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-12-13",
+      "source": "bus12",
+      "target": "bus13",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 1.468,
+        "reactanceOhm": 1.1549,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-13-14",
+      "source": "bus13",
+      "target": "bus14",
+      "sourceHandle": "top",
+      "targetHandle": "bottom",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.5416,
+        "reactanceOhm": 0.7129,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-14-15",
+      "source": "bus14",
+      "target": "bus15",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.5909,
+        "reactanceOhm": 0.526,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-15-16",
+      "source": "bus15",
+      "target": "bus16",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.7462,
+        "reactanceOhm": 0.5449,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-16-17",
+      "source": "bus16",
+      "target": "bus17",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 1.2889,
+        "reactanceOhm": 1.721,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-17-18",
+      "source": "bus17",
+      "target": "bus18",
+      "sourceHandle": "top",
+      "targetHandle": "bottom",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.732,
+        "reactanceOhm": 0.5739,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-2-19",
+      "source": "bus2",
+      "target": "bus19",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.164,
+        "reactanceOhm": 0.1565,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-19-20",
+      "source": "bus19",
+      "target": "bus20",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 1.5042,
+        "reactanceOhm": 1.3555,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-20-21",
+      "source": "bus20",
+      "target": "bus21",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.4095,
+        "reactanceOhm": 0.4784,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-21-22",
+      "source": "bus21",
+      "target": "bus22",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.7089,
+        "reactanceOhm": 0.9373,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-3-23",
+      "source": "bus3",
+      "target": "bus23",
+      "sourceHandle": "top",
+      "targetHandle": "bottom",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.4512,
+        "reactanceOhm": 0.3084,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-23-24",
+      "source": "bus23",
+      "target": "bus24",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.898,
+        "reactanceOhm": 0.7091,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-24-25",
+      "source": "bus24",
+      "target": "bus25",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.8959,
+        "reactanceOhm": 0.7071,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-6-26",
+      "source": "bus6",
+      "target": "bus26",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.2031,
+        "reactanceOhm": 0.1034,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-26-27",
+      "source": "bus26",
+      "target": "bus27",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.2842,
+        "reactanceOhm": 0.1447,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-27-28",
+      "source": "bus27",
+      "target": "bus28",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 1.0589,
+        "reactanceOhm": 0.9338,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-28-29",
+      "source": "bus28",
+      "target": "bus29",
+      "sourceHandle": "top",
+      "targetHandle": "bottom",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.8043,
+        "reactanceOhm": 0.7006,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-29-30",
+      "source": "bus29",
+      "target": "bus30",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.5074,
+        "reactanceOhm": 0.2585,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-30-31",
+      "source": "bus30",
+      "target": "bus31",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.9745,
+        "reactanceOhm": 0.9629,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-31-32",
+      "source": "bus31",
+      "target": "bus32",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.3105,
+        "reactanceOhm": 0.3619,
+        "maxCurrentA": 400
+      }
+    },
+    {
+      "id": "edge-32-33",
+      "source": "bus32",
+      "target": "bus33",
+      "sourceHandle": "right",
+      "targetHandle": "left",
+      "type": "powerLine",
+      "data": {
+        "resistanceOhm": 0.3411,
+        "reactanceOhm": 0.5302,
+        "maxCurrentA": 400
+      }
+    }
+  ]
+}
