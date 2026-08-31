@@ -1,5 +1,5 @@
 import React from 'react';
-import type { PdnNodeData } from '../../types/graph.types';
+import { ComponentType, type PdnNodeData } from '../../types/graph.types';
 import { FourSideHandles } from './FourSideHandles';
 
 interface BaseNodeProps {
@@ -48,11 +48,30 @@ export const BaseNode: React.FC<BaseNodeProps> = ({ data, icon, accentColorClass
         </div>
       </div>
 
-      {data.result?.voltagePu != null && (
-        <div className="mt-1 text-[10px] text-slate-500">
-          {data.result.voltagePu.toFixed(3)} p.u.
-        </div>
-      )}
+      {/* Parameters and solved results inline display */}
+      <div className="mt-1.5 flex flex-col text-[10px] text-slate-500 font-medium leading-normal border-t border-slate-100 pt-1">
+        {data.componentType === ComponentType.LOAD && (
+          <div>
+            Load: {((data.params as any).pDemandMw ?? 0)}/{(data.params as any).qDemandMvar ?? 0}
+          </div>
+        )}
+        {data.componentType === ComponentType.GENERATOR && (
+          <div>
+            Gen: {((data.params as any).pMaxMw ?? 0)} MW
+          </div>
+        )}
+        {data.componentType === ComponentType.TRANSFORMER && (
+          <div>
+            Rating: {((data.params as any).ratedPowerMva ?? 0)} MVA
+          </div>
+        )}
+        {data.result?.voltagePu != null && (
+          <div className="font-bold text-indigo-600 mt-0.5 whitespace-nowrap">
+            V: {data.result.voltagePu.toFixed(3)} pu
+            {data.result.voltageAngleDeg != null ? ` ∠${data.result.voltageAngleDeg.toFixed(1)}°` : ''}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

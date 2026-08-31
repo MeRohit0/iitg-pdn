@@ -38,12 +38,12 @@ export const DotNode: React.FC<DotNodeProps> = ({ data, selected }) => {
       : 'ring-1 ring-slate-300';
 
   return (
-    <div className="relative flex items-center justify-center p-2" title={tooltipParts.join(' · ')}>
+    <div className="relative flex flex-col items-center p-0.5" title={tooltipParts.join(' · ')}>
       <FourSideHandles />
 
       <div
         className={[
-          'flex items-center justify-center h-7 w-7 rounded-full bg-slate-900 transition-transform',
+          'flex items-center justify-center h-7 w-7 rounded-full bg-slate-900 transition-transform z-10',
           ringClass,
           selected ? 'scale-110 ring-2 ring-indigo-500' : '',
         ].join(' ')}
@@ -51,6 +51,21 @@ export const DotNode: React.FC<DotNodeProps> = ({ data, selected }) => {
         <span className="text-[10px] font-bold text-white leading-none select-none">
           {data.label}
         </span>
+      </div>
+
+      {/* Inline data and solved voltage label */}
+      <div className="absolute top-[36px] flex flex-col items-center pointer-events-none whitespace-nowrap bg-white/90 border border-slate-200 rounded px-1 py-0.5 text-[8px] text-slate-500 shadow-sm leading-tight">
+        {data.result?.voltagePu != null && (
+          <div className="font-bold text-indigo-600">
+            {data.result.voltagePu.toFixed(3)} pu
+            {data.result.voltageAngleDeg != null ? ` ∠${data.result.voltageAngleDeg.toFixed(1)}°` : ''}
+          </div>
+        )}
+        {((params.activePowerMw ?? 0) !== 0 || (params.reactivePowerMvar ?? 0) !== 0) && (
+          <div className="text-slate-400 font-medium">
+            {params.activePowerMw ?? 0}/{params.reactivePowerMvar ?? 0}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -25,6 +25,8 @@ const TYPE_FIELDS: Record<ComponentType, FieldDescriptor[]> = {
   [ComponentType.SUBSTATION]: [
     { key: 'isSlackBus', label: 'Slack / reference bus', type: 'checkbox' },
     { key: 'maxImportMw', label: 'Max import', type: 'number', unit: 'MW', step: 0.1 },
+    { key: 'slackVoltagePu', label: 'Slack Voltage', type: 'number', unit: 'p.u.', step: 0.01 },
+    { key: 'slackAngleDeg', label: 'Slack Angle', type: 'number', unit: '°', step: 0.1 },
   ],
   [ComponentType.TRANSFORMER]: [
     { key: 'ratedPowerMva', label: 'Rated power', type: 'number', unit: 'MVA', step: 0.1 },
@@ -157,6 +159,7 @@ export const NodeInspectorPanel: React.FC<NodeInspectorPanelProps> = ({
                 <div>
                   Voltage: {result.voltagePu.toFixed(3)} p.u.
                   {result.voltageKv != null ? ` (${result.voltageKv.toFixed(2)} kV)` : ''}
+                  {result.voltageAngleDeg != null ? ` ∠ ${result.voltageAngleDeg.toFixed(2)}°` : ''}
                 </div>
               )}
               {result.pInjectionMw != null && <div>P injection: {result.pInjectionMw.toFixed(3)} MW</div>}

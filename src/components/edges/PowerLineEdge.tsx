@@ -84,7 +84,7 @@ export const PowerLineEdge: React.FC<PdnEdgeProps> = ({
         }}
       />
 
-      {loadingPct != null && !selected && (
+      {!selected && (
         <EdgeLabelRenderer>
           <div
             style={{
@@ -92,9 +92,16 @@ export const PowerLineEdge: React.FC<PdnEdgeProps> = ({
               transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)`,
               pointerEvents: 'none',
             }}
-            className="rounded bg-white/90 px-1.5 py-0.5 text-[10px] font-medium shadow border border-slate-200"
+            className="flex flex-col items-center rounded bg-white/95 px-1.5 py-0.5 border border-slate-200 shadow-sm leading-tight text-slate-500 font-mono text-[8px]"
           >
-            {loadingPct.toFixed(0)}%
+            {loadingPct != null && (
+              <span className="text-[10px] font-extrabold text-indigo-600 block mb-0.5">
+                {loadingPct.toFixed(0)}%
+              </span>
+            )}
+            <span>
+              R:{data?.resistanceOhm ?? 0} X:{data?.reactanceOhm ?? 0}
+            </span>
           </div>
         </EdgeLabelRenderer>
       )}

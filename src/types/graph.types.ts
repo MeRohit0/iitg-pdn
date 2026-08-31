@@ -52,6 +52,8 @@ export interface BaseElectricalParams {
 export interface SubstationParams extends BaseElectricalParams {
   isSlackBus: boolean; // reference/swing bus for the solver
   maxImportMw?: number;
+  slackVoltagePu?: number; // magnitude in p.u., default 1.0
+  slackAngleDeg?: number;  // phase angle in degrees, default 0.0
 }
 
 export interface TransformerParams extends BaseElectricalParams {
@@ -105,6 +107,7 @@ export type ComponentParams =
 export interface NodeResult {
   voltagePu?: number;
   voltageKv?: number;
+  voltageAngleDeg?: number; // solved angle in degrees
   pInjectionMw?: number;
   qInjectionMvar?: number;
   isEnergized?: boolean;

@@ -22,7 +22,8 @@ import { NodeInspectorPanel } from './NodeInspectorPanel';
 import { EdgeInspectorPanel } from './EdgeInspectorPanel';
 import { GraphIOPanel } from './GraphIOPanel';
 import { validateGraph, type ValidationIssue } from '../../utils/graphValidation';
-import { mockSolve } from '../../utils/mockSolver';
+import { bfsSolve } from '../../utils/bfsSolver';
+import { ResultsPanel } from './ResultsPanel';
 import { defaultParamsFor, TYPE_LABELS } from '../../utils/nodeDefaults';
 import { clearPersistedGraph, loadPersistedGraph, savePersistedGraph } from '../../utils/graphPersistence';
 import {
@@ -81,7 +82,7 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
   initialEdges,
   onSelectionChange,
 }) => {
-  const { screenToFlowPosition, fitView } = useReactFlow();
+  const { screenToFlowPosition, fitView, setCenter } = useReactFlow();
 
   // On first mount, prefer whatever was last saved to localStorage over the
   // demo topology passed in via props — that's what makes the canvas
@@ -96,6 +97,7 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
   const [isSolving, setIsSolving] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [lastResult, setLastResult] = useState<OptimizationResult | null>(null);
+  const [isResultsPanelOpen, setIsResultsPanelOpen] = useState(false);
   const [inspectorTarget, setInspectorTarget] = useState<InspectorTarget>(null);
   // When set, the next click on empty canvas places a node of this type
   // instead of just deselecting everything.
@@ -345,7 +347,7 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
     setErrorMessage(null);
 
     // setTimeout keeps the "Solving…" state visible for a beat even though
-    // mockSolve itself is synchronous — swap this for a real async call
+    // bfsSolve itself is synchronous — swap this for a real async call
     // (e.g. `await pdnApi.solve({ nodes, edges })`) once a backend exists.
     setTimeout(() => {
       try {
@@ -358,7 +360,7 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
           return;
         }
 
-        const result = mockSolve(nodes, edges);
+        const result = bfsSolve(nodes, edges);
         setLastResult(result);
         applyResultOverlay(result);
 
@@ -367,6 +369,8 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
           result.summary.status === SolveStatus.ERROR
         ) {
           setErrorMessage(result.summary.message ?? 'Solve did not complete successfully.');
+        } else {
+          setIsResultsPanelOpen(true);
         }
       } catch (err) {
         setErrorMessage(err instanceof Error ? err.message : 'Unexpected error while solving.');
@@ -464,6 +468,28 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
         />
       )}
 
+      {isResultsPanelOpen && (
+        <ResultsPanel
+          nodes={nodes}
+          edges={edges}
+          result={lastResult}
+          onClose={() => setIsResultsPanelOpen(false)}
+          onFocusNode={(node) => {
+            const offset = node.data.componentType === ComponentType.NODE ? 14 : 22;
+            setCenter(node.position.x + offset, node.position.y + offset, { zoom: 2.0, duration: 300 });
+          }}
+          onFocusEdge={(edge) => {
+            const sNode = nodes.find((n) => n.id === edge.source);
+            const tNode = nodes.find((n) => n.id === edge.target);
+            if (sNode && tNode) {
+              const midX = (sNode.position.x + tNode.position.x) / 2;
+              const midY = (sNode.position.y + tNode.position.y) / 2;
+              setCenter(midX + 22, midY + 22, { zoom: 1.5, duration: 300 });
+            }
+          }}
+        />
+      )}
+
       {!errorMessage && (
         <div className="absolute bottom-4 left-4 max-w-xs rounded-md bg-white/90 border border-slate-200 shadow px-3 py-1.5 text-[11px] text-slate-500">
           Pick a type in "Add node" then click the canvas to place it · drag
@@ -475,6 +501,20 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
 
       <div className="absolute top-4 right-4 flex flex-col items-end gap-2">
         <div className="flex items-center gap-2">
+          {lastResult && (
+            <button
+              type="button"
+              onClick={() => setIsResultsPanelOpen((p) => !p)}
+              title="Show or hide the solver results panel"
+              className={`rounded-md border px-2.5 py-2 text-xs font-medium shadow transition-colors ${
+                isResultsPanelOpen
+                  ? 'border-indigo-600 bg-indigo-50 text-indigo-600 hover:bg-indigo-100/50'
+                  : 'border-slate-300 bg-white text-slate-500 hover:bg-slate-50'
+              }`}
+            >
+              📊 Results
+            </button>
+          )}
           <button
             type="button"
             onClick={() => setIsIOPanelOpen(true)}

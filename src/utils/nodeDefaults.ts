@@ -35,7 +35,7 @@ export const TYPE_ACCENT_CLASS: Record<ComponentType, string> = {
 export function defaultParamsFor(type: ComponentType): ComponentParams {
   switch (type) {
     case ComponentType.SUBSTATION:
-      return { baseVoltageKv: 11, isSlackBus: false };
+      return { baseVoltageKv: 11, isSlackBus: false, slackVoltagePu: 1.0, slackAngleDeg: 0.0 };
     case ComponentType.TRANSFORMER:
       return {
         baseVoltageKv: 11,

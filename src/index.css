@@ -6,3 +6,16 @@ html, body, #root {
   height: 100%;
   margin: 0;
 }
+
+/* Hide connection handles by default, fade/animate them in on hover, selection, or active connection drag */
+.react-flow__handle {
+  opacity: 0 !important;
+  transition: opacity 0.15s ease-in-out !important;
+}
+
+.react-flow__node:hover .react-flow__handle,
+.react-flow__node.selected .react-flow__handle,
+.react-flow__node:focus-within .react-flow__handle,
+.react-flow--connection-drag-active .react-flow__handle {
+  opacity: 1 !important;
+}
