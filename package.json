@@ -9,7 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/plotly.js-dist-min": "^2.3.4",
     "@xyflow/react": "^12.3.0",
+    "plotly.js-dist-min": "^4.0.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0"
   },

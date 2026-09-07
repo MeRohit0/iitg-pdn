@@ -24,6 +24,7 @@ import { GraphIOPanel } from './GraphIOPanel';
 import { validateGraph, type ValidationIssue } from '../../utils/graphValidation';
 import { bfsSolve } from '../../utils/bfsSolver';
 import { ResultsPanel } from './ResultsPanel';
+import { TimeSeriesAnalyticsModal } from '../analytics/TimeSeriesAnalyticsModal';
 import { defaultParamsFor, TYPE_LABELS } from '../../utils/nodeDefaults';
 import { clearPersistedGraph, loadPersistedGraph, savePersistedGraph } from '../../utils/graphPersistence';
 import {
@@ -103,6 +104,7 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
   // instead of just deselecting everything.
   const [pendingNodeType, setPendingNodeType] = useState<ComponentType | null>(null);
   const [isIOPanelOpen, setIsIOPanelOpen] = useState(false);
+  const [isAnalyticsOpen, setIsAnalyticsOpen] = useState(false);
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds) as PdnNode[]),
@@ -468,6 +470,14 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
         />
       )}
 
+      {isAnalyticsOpen && (
+        <TimeSeriesAnalyticsModal
+          nodes={nodes}
+          edges={edges}
+          onClose={() => setIsAnalyticsOpen(false)}
+        />
+      )}
+
       {isResultsPanelOpen && (
         <ResultsPanel
           nodes={nodes}
@@ -515,6 +525,14 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
               📊 Results
             </button>
           )}
+          <button
+            type="button"
+            onClick={() => setIsAnalyticsOpen(true)}
+            title="Open 24-hour time-series simulation, 2D profiles, and 3D surface charts"
+            className="rounded-md border border-indigo-200 bg-indigo-50/80 px-2.5 py-2 text-xs font-medium text-indigo-700 shadow hover:bg-indigo-100 transition-colors"
+          >
+            📈 24h Analytics
+          </button>
           <button
             type="button"
             onClick={() => setIsIOPanelOpen(true)}
