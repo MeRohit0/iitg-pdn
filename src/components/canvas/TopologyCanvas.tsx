@@ -387,9 +387,9 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
     const { summary } = lastResult;
     return (
       <div className="flex gap-3 rounded-md bg-white/90 border border-slate-200 shadow px-3 py-1.5 text-xs text-slate-600">
-        <span>Loss: {summary.totalSystemLossMw?.toFixed(3)} MW</span>
-        <span>Gen: {summary.totalGenerationMw?.toFixed(2)} MW</span>
-        <span>Demand: {summary.totalDemandMw?.toFixed(2)} MW</span>
+        <span>Loss: {summary.totalSystemLossMw?.toFixed(3)} KW</span>
+        <span>Gen: {summary.totalGenerationMw?.toFixed(2)} KW</span>
+        <span>Demand: {summary.totalDemandMw?.toFixed(2)} KW</span>
         <span>Cost: ${summary.objectiveValue?.toFixed(2)}</span>
       </div>
     );

@@ -49,8 +49,8 @@ const TYPE_FIELDS: Record<ComponentType, FieldDescriptor[]> = {
   ],
   [ComponentType.FEEDER]: [],
   [ComponentType.NODE]: [
-    { key: 'activePowerMw', label: 'Active power (P)', type: 'number', unit: 'MW', step: 0.1 },
-    { key: 'reactivePowerMvar', label: 'Reactive power (Q)', type: 'number', unit: 'MVAr', step: 0.1 },
+    { key: 'activePowerMw', label: 'Active power (P)', type: 'number', unit: 'KW', step: 0.1 },
+    { key: 'reactivePowerMvar', label: 'Reactive power (Q)', type: 'number', unit: 'KVAr', step: 0.1 },
   ],
 };
 
@@ -162,9 +162,9 @@ export const NodeInspectorPanel: React.FC<NodeInspectorPanelProps> = ({
                   {result.voltageAngleDeg != null ? ` ∠ ${result.voltageAngleDeg.toFixed(2)}°` : ''}
                 </div>
               )}
-              {result.pInjectionMw != null && <div>P injection: {result.pInjectionMw.toFixed(3)} MW</div>}
+              {result.pInjectionMw != null && <div>P injection: {result.pInjectionMw.toFixed(3)} KW</div>}
               {result.qInjectionMvar != null && (
-                <div>Q injection: {result.qInjectionMvar.toFixed(3)} MVAr</div>
+                <div>Q injection: {result.qInjectionMvar.toFixed(3)} KVAr</div>
               )}
               <div>Energized: {result.isEnergized ? 'Yes' : 'No'}</div>
             </div>

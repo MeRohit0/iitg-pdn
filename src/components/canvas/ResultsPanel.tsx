@@ -109,7 +109,7 @@ export const ResultsPanel: React.FC<ResultsPanelProps> = ({
             <div className="bg-white border border-slate-200 rounded p-1.5 shadow-sm">
               <span className="block text-slate-400 text-[9px] uppercase font-semibold">Total Loss</span>
               <span className="text-sm font-bold text-indigo-600">
-                {summary.totalSystemLossMw != null ? `${summary.totalSystemLossMw.toFixed(3)} MW` : 'N/A'}
+                {summary.totalSystemLossMw != null ? `${summary.totalSystemLossMw.toFixed(3)} KW` : 'N/A'}
               </span>
             </div>
             <div className="bg-white border border-slate-200 rounded p-1.5 shadow-sm">
@@ -122,11 +122,11 @@ export const ResultsPanel: React.FC<ResultsPanelProps> = ({
           <div className="grid grid-cols-2 gap-2">
             <div>
               <span className="text-slate-400">Total Generation:</span>{' '}
-              <span className="font-semibold text-slate-700">{summary.totalGenerationMw?.toFixed(2)} MW</span>
+              <span className="font-semibold text-slate-700">{summary.totalGenerationMw?.toFixed(2)} KW</span>
             </div>
             <div>
               <span className="text-slate-400">Total Demand:</span>{' '}
-              <span className="font-semibold text-slate-700">{summary.totalDemandMw?.toFixed(2)} MW</span>
+              <span className="font-semibold text-slate-700">{summary.totalDemandMw?.toFixed(2)} KW</span>
             </div>
           </div>
           <div className="text-[9px] text-slate-400 flex items-center justify-between">
@@ -213,7 +213,7 @@ export const ResultsPanel: React.FC<ResultsPanelProps> = ({
                     </div>
                     {isEnergized ? (
                       <div className="text-[10px] text-slate-500 mt-0.5">
-                        P load: {Math.max(0, -pInj).toFixed(1)} MW
+                        P load: {Math.max(0, -pInj).toFixed(1)} KW
                       </div>
                     ) : (
                       <span className="text-[9px] font-semibold text-slate-400 uppercase">De-energized</span>
@@ -273,8 +273,8 @@ export const ResultsPanel: React.FC<ResultsPanelProps> = ({
                     </div>
                     {res?.status !== LineStatus.DE_ENERGIZED ? (
                       <div className="text-[9px] text-slate-500 space-y-0.5 mt-0.5 font-mono">
-                        <div>Flow: {pFlow.toFixed(3)} MW</div>
-                        <div>Loss: {loss.toFixed(5)} MW</div>
+                        <div>Flow: {pFlow.toFixed(3)} KW</div>
+                        <div>Loss: {loss.toFixed(5)} KW</div>
                         <div>R: {edge.data?.resistanceOhm}Ω | X: {edge.data?.reactanceOhm}Ω</div>
                       </div>
                     ) : (
