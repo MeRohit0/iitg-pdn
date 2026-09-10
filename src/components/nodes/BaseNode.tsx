@@ -24,6 +24,16 @@ export const BaseNode: React.FC<BaseNodeProps> = ({ data, icon, accentColorClass
       ? 'ring-2 ring-emerald-400'
       : '';
 
+  const customerType = (data.params as any)?.customerType;
+  let custBadge: { text: string; className: string } | null = null;
+  if (customerType === 'Residential') {
+    custBadge = { text: 'Residential', className: 'bg-blue-100 text-blue-700 border-blue-200' };
+  } else if (customerType === 'Industrial') {
+    custBadge = { text: 'Industrial', className: 'bg-amber-100 text-amber-700 border-amber-200' };
+  } else if (customerType === 'Commercial') {
+    custBadge = { text: 'Commercial', className: 'bg-emerald-100 text-emerald-700 border-emerald-200' };
+  }
+
   return (
     <div
       className={[
@@ -36,16 +46,23 @@ export const BaseNode: React.FC<BaseNodeProps> = ({ data, icon, accentColorClass
     >
       <FourSideHandles />
 
-      <div className="flex items-center gap-2">
-        <span className="text-lg leading-none">{icon}</span>
-        <div className="flex flex-col">
-          <span className="text-xs font-semibold text-slate-800 leading-tight">
-            {data.label}
-          </span>
-          <span className="text-[10px] text-slate-400 uppercase tracking-wide">
-            {data.componentType}
-          </span>
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <span className="text-lg leading-none">{icon}</span>
+          <div className="flex flex-col">
+            <span className="text-xs font-semibold text-slate-800 leading-tight">
+              {data.label}
+            </span>
+            <span className="text-[10px] text-slate-400 uppercase tracking-wide">
+              {data.componentType}
+            </span>
+          </div>
         </div>
+        {custBadge && (
+          <span className={`px-1.5 py-0.5 rounded border text-[8px] font-semibold ${custBadge.className}`}>
+            {custBadge.text}
+          </span>
+        )}
       </div>
 
       {/* Parameters and solved results inline display */}

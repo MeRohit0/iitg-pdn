@@ -2,7 +2,12 @@ import React from 'react';
 import { ComponentType, type PdnNode } from '../../types/graph.types';
 import { TYPE_ICONS, TYPE_LABELS } from '../../utils/nodeDefaults';
 
-type FieldType = 'number' | 'checkbox';
+type FieldType = 'number' | 'checkbox' | 'select';
+
+interface FieldOption {
+  label: string;
+  value: string;
+}
 
 interface FieldDescriptor {
   key: string; // key inside node.data.params
@@ -10,6 +15,7 @@ interface FieldDescriptor {
   type: FieldType;
   unit?: string;
   step?: number;
+  options?: FieldOption[];
 }
 
 /** Fields shown for every component type, on top of its type-specific ones. */
@@ -18,6 +24,18 @@ const COMMON_FIELDS: FieldDescriptor[] = [
   { key: 'minVoltagePu', label: 'Min voltage', type: 'number', unit: 'p.u.', step: 0.01 },
   { key: 'maxVoltagePu', label: 'Max voltage', type: 'number', unit: 'p.u.', step: 0.01 },
 ];
+
+const CUSTOMER_TYPE_FIELD: FieldDescriptor = {
+  key: 'customerType',
+  label: 'Customer type',
+  type: 'select',
+  options: [
+    { label: 'Residential', value: 'Residential' },
+    { label: 'Commercial', value: 'Commercial' },
+    { label: 'Industrial', value: 'Industrial' },
+    { label: 'None / Unassigned', value: 'None' },
+  ],
+};
 
 /** Type-specific fields — this is the single place to add/remove a
  *  parameter from the inspector; nothing else needs to change. */
@@ -43,12 +61,14 @@ const TYPE_FIELDS: Record<ComponentType, FieldDescriptor[]> = {
     { key: 'costPerMwh', label: 'Generation cost', type: 'number', unit: '$/MWh', step: 1 },
   ],
   [ComponentType.LOAD]: [
+    CUSTOMER_TYPE_FIELD,
     { key: 'pDemandMw', label: 'Load — active power', type: 'number', unit: 'MW', step: 0.1 },
     { key: 'qDemandMvar', label: 'Load — reactive power', type: 'number', unit: 'MVAr', step: 0.1 },
     { key: 'isCritical', label: 'Critical load', type: 'checkbox' },
   ],
   [ComponentType.FEEDER]: [],
   [ComponentType.NODE]: [
+    CUSTOMER_TYPE_FIELD,
     { key: 'activePowerMw', label: 'Active power (P)', type: 'number', unit: 'KW', step: 0.1 },
     { key: 'reactivePowerMvar', label: 'Reactive power (Q)', type: 'number', unit: 'KVAr', step: 0.1 },
   ],
@@ -58,7 +78,7 @@ interface NodeInspectorPanelProps {
   node: PdnNode;
   onClose: () => void;
   onChangeLabel: (label: string) => void;
-  onChangeParam: (key: string, value: number | boolean | undefined) => void;
+  onChangeParam: (key: string, value: number | boolean | string | undefined) => void;
 }
 
 /** Slide-in sidebar opened by double-clicking a node. Every field maps
@@ -128,6 +148,27 @@ export const NodeInspectorPanel: React.FC<NodeInspectorPanelProps> = ({
                   className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
                 />
               </label>
+            );
+          }
+
+          if (field.type === 'select') {
+            return (
+              <div key={field.key}>
+                <label className="block text-[11px] font-medium text-slate-500 mb-1">
+                  {field.label}
+                </label>
+                <select
+                  value={typeof rawValue === 'string' ? rawValue : 'None'}
+                  onChange={(e) => onChangeParam(field.key, e.target.value)}
+                  className="w-full rounded-md border border-slate-300 px-2 py-1.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800"
+                >
+                  {field.options?.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
             );
           }
 

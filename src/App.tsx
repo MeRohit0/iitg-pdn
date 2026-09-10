@@ -72,11 +72,14 @@ function buildDemoNodes(): PdnNode[] {
         data: {
           label: '1',
           componentType: ComponentType.SUBSTATION,
-          params: { baseVoltageKv: BASE_VOLTAGE_KV, isSlackBus: true },
+          params: { baseVoltageKv: BASE_VOLTAGE_KV, isSlackBus: true, customerType: 'None' },
         },
       };
       return node;
     }
+
+    const customerType =
+      bus >= 26 ? 'Industrial' : bus >= 19 ? 'Commercial' : 'Residential';
 
     // Real P/Q demand per bus isn't hardcoded here — double-click any bus
     // to enter its actual load from your own data via the inspector.
@@ -87,7 +90,7 @@ function buildDemoNodes(): PdnNode[] {
       data: {
         label: String(bus),
         componentType: ComponentType.NODE,
-        params: { baseVoltageKv: BASE_VOLTAGE_KV, activePowerMw: 0, reactivePowerMvar: 0 },
+        params: { baseVoltageKv: BASE_VOLTAGE_KV, activePowerMw: 0, reactivePowerMvar: 0, customerType },
       },
     };
     return node;

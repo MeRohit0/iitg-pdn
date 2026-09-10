@@ -38,6 +38,8 @@ export enum SolveStatus {
   ERROR = 'error',
 }
 
+export type CustomerType = 'Residential' | 'Industrial' | 'Commercial' | 'None';
+
 // ---------------------------------------------------------------------------
 // Node parameter payloads (per component type)
 // ---------------------------------------------------------------------------
@@ -47,6 +49,7 @@ export interface BaseElectricalParams {
   baseVoltageKv: number; // nominal line-to-line voltage, kV
   minVoltagePu?: number; // default 0.95
   maxVoltagePu?: number; // default 1.05
+  customerType?: CustomerType; // customer classification for time-series multipliers
 }
 
 export interface SubstationParams extends BaseElectricalParams {

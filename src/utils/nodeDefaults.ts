@@ -47,11 +47,11 @@ export function defaultParamsFor(type: ComponentType): ComponentParams {
     case ComponentType.GENERATOR:
       return { baseVoltageKv: 0.4, pMaxMw: 1, costPerMwh: 60 };
     case ComponentType.LOAD:
-      return { baseVoltageKv: 0.4, pDemandMw: 1, qDemandMvar: 0.2 };
+      return { baseVoltageKv: 0.4, pDemandMw: 1, qDemandMvar: 0.2, customerType: 'Residential' };
     case ComponentType.FEEDER:
       return { baseVoltageKv: 0.4 };
     case ComponentType.NODE:
-      return { baseVoltageKv: 0.4, activePowerMw: 0, reactivePowerMvar: 0 };
+      return { baseVoltageKv: 0.4, activePowerMw: 0, reactivePowerMvar: 0, customerType: 'Residential' };
     default:
       return { baseVoltageKv: 11 };
   }

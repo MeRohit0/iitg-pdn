@@ -21,14 +21,21 @@ interface DotNodeProps {
  */
 export const DotNode: React.FC<DotNodeProps> = ({ data, selected }) => {
   const isEnergized = data.result?.isEnergized;
-  const params = data.params as { activePowerMw?: number; reactivePowerMvar?: number };
+  const params = data.params as {
+    activePowerMw?: number;
+    reactivePowerMvar?: number;
+    customerType?: string;
+  };
 
   const tooltipParts = [data.label];
+  if (params.customerType && params.customerType !== 'None') {
+    tooltipParts.push(`Type: ${params.customerType}`);
+  }
   if (data.result?.voltagePu != null) {
     tooltipParts.push(`${data.result.voltagePu.toFixed(3)} p.u.`);
   }
-  if (params.activePowerMw != null) tooltipParts.push(`P=${params.activePowerMw} MW`);
-  if (params.reactivePowerMvar != null) tooltipParts.push(`Q=${params.reactivePowerMvar} MVAr`);
+  if (params.activePowerMw != null) tooltipParts.push(`P=${params.activePowerMw} kW`);
+  if (params.reactivePowerMvar != null) tooltipParts.push(`Q=${params.reactivePowerMvar} kVAr`);
 
   const ringClass =
     isEnergized === false
@@ -37,13 +44,22 @@ export const DotNode: React.FC<DotNodeProps> = ({ data, selected }) => {
       ? 'ring-2 ring-emerald-400'
       : 'ring-1 ring-slate-300';
 
+  let custBadge: { text: string; className: string } | null = null;
+  if (params.customerType === 'Residential') {
+    custBadge = { text: 'R', className: 'bg-blue-600 text-white' };
+  } else if (params.customerType === 'Industrial') {
+    custBadge = { text: 'I', className: 'bg-amber-600 text-white' };
+  } else if (params.customerType === 'Commercial') {
+    custBadge = { text: 'C', className: 'bg-emerald-600 text-white' };
+  }
+
   return (
     <div className="relative flex flex-col items-center p-0.5" title={tooltipParts.join(' · ')}>
       <FourSideHandles />
 
       <div
         className={[
-          'flex items-center justify-center h-7 w-7 rounded-full bg-slate-900 transition-transform z-10',
+          'relative flex items-center justify-center h-7 w-7 rounded-full bg-slate-900 transition-transform z-10',
           ringClass,
           selected ? 'scale-110 ring-2 ring-indigo-500' : '',
         ].join(' ')}
@@ -51,6 +67,14 @@ export const DotNode: React.FC<DotNodeProps> = ({ data, selected }) => {
         <span className="text-[10px] font-bold text-white leading-none select-none">
           {data.label}
         </span>
+        {custBadge && (
+          <span
+            className={`absolute -top-1.5 -right-2 px-1 rounded-full text-[7px] font-black leading-tight shadow-sm ${custBadge.className}`}
+            title={`Customer Type: ${params.customerType}`}
+          >
+            {custBadge.text}
+          </span>
+        )}
       </div>
 
       {/* Inline data and solved voltage label */}

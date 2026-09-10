@@ -272,7 +272,7 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
   );
 
   const handleChangeNodeParam = useCallback(
-    (key: string, value: number | boolean | undefined) => {
+    (key: string, value: number | boolean | string | undefined) => {
       if (inspectorTarget?.kind !== 'node') return;
       const id = inspectorTarget.id;
       setNodes((nds) =>
