@@ -14,7 +14,8 @@
           "baseVoltageKv": 12.66,
           "isSlackBus": true,
           "activePowerMw": 0,
-          "reactivePowerMvar": 0
+          "reactivePowerMvar": 0,
+          "customerType": "None"
         }
       },
       "measured": {
@@ -35,7 +36,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 100,
-          "reactivePowerMvar": 60
+          "reactivePowerMvar": 60,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -57,7 +59,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 90,
-          "reactivePowerMvar": 40
+          "reactivePowerMvar": 40,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -78,7 +81,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 120,
-          "reactivePowerMvar": 80
+          "reactivePowerMvar": 80,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -99,7 +103,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 60,
-          "reactivePowerMvar": 30
+          "reactivePowerMvar": 30,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -120,7 +125,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 60,
-          "reactivePowerMvar": 20
+          "reactivePowerMvar": 20,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -141,7 +147,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 200,
-          "reactivePowerMvar": 100
+          "reactivePowerMvar": 100,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -162,7 +169,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 200,
-          "reactivePowerMvar": 100
+          "reactivePowerMvar": 100,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -183,7 +191,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 60,
-          "reactivePowerMvar": 20
+          "reactivePowerMvar": 20,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -204,7 +213,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 60,
-          "reactivePowerMvar": 20
+          "reactivePowerMvar": 20,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -225,7 +235,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 45,
-          "reactivePowerMvar": 30
+          "reactivePowerMvar": 30,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -246,7 +257,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 60,
-          "reactivePowerMvar": 35
+          "reactivePowerMvar": 35,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -267,7 +279,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 60,
-          "reactivePowerMvar": 35
+          "reactivePowerMvar": 35,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -288,7 +301,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 120,
-          "reactivePowerMvar": 80
+          "reactivePowerMvar": 80,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -309,7 +323,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 60,
-          "reactivePowerMvar": 10
+          "reactivePowerMvar": 10,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -330,7 +345,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 60,
-          "reactivePowerMvar": 20
+          "reactivePowerMvar": 20,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -351,7 +367,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 60,
-          "reactivePowerMvar": 20
+          "reactivePowerMvar": 20,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -372,7 +389,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 90,
-          "reactivePowerMvar": 40
+          "reactivePowerMvar": 40,
+          "customerType": "Residential"
         }
       },
       "measured": {
@@ -393,7 +411,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 90,
-          "reactivePowerMvar": 40
+          "reactivePowerMvar": 40,
+          "customerType": "Commercial"
         }
       },
       "measured": {
@@ -414,7 +433,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 90,
-          "reactivePowerMvar": 40
+          "reactivePowerMvar": 40,
+          "customerType": "Commercial"
         }
       },
       "measured": {
@@ -435,7 +455,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 90,
-          "reactivePowerMvar": 40
+          "reactivePowerMvar": 40,
+          "customerType": "Commercial"
         }
       },
       "measured": {
@@ -456,7 +477,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 90,
-          "reactivePowerMvar": 40
+          "reactivePowerMvar": 40,
+          "customerType": "Commercial"
         }
       },
       "measured": {
@@ -477,7 +499,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 90,
-          "reactivePowerMvar": 50
+          "reactivePowerMvar": 50,
+          "customerType": "Commercial"
         }
       },
       "measured": {
@@ -498,7 +521,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 420,
-          "reactivePowerMvar": 200
+          "reactivePowerMvar": 200,
+          "customerType": "Commercial"
         }
       },
       "measured": {
@@ -519,7 +543,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 420,
-          "reactivePowerMvar": 200
+          "reactivePowerMvar": 200,
+          "customerType": "Commercial"
         }
       },
       "measured": {
@@ -540,7 +565,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 60,
-          "reactivePowerMvar": 25
+          "reactivePowerMvar": 25,
+          "customerType": "Industrial"
         }
       },
       "measured": {
@@ -561,7 +587,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 60,
-          "reactivePowerMvar": 25
+          "reactivePowerMvar": 25,
+          "customerType": "Industrial"
         }
       },
       "measured": {
@@ -582,7 +609,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 60,
-          "reactivePowerMvar": 20
+          "reactivePowerMvar": 20,
+          "customerType": "Industrial"
         }
       },
       "measured": {
@@ -603,7 +631,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 120,
-          "reactivePowerMvar": 70
+          "reactivePowerMvar": 70,
+          "customerType": "Industrial"
         }
       },
       "measured": {
@@ -624,7 +653,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 200,
-          "reactivePowerMvar": 600
+          "reactivePowerMvar": 600,
+          "customerType": "Industrial"
         }
       },
       "measured": {
@@ -645,7 +675,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 150,
-          "reactivePowerMvar": 70
+          "reactivePowerMvar": 70,
+          "customerType": "Industrial"
         }
       },
       "measured": {
@@ -666,7 +697,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 210,
-          "reactivePowerMvar": 100
+          "reactivePowerMvar": 100,
+          "customerType": "Industrial"
         }
       },
       "measured": {
@@ -687,7 +719,8 @@
         "params": {
           "baseVoltageKv": 12.66,
           "activePowerMw": 60,
-          "reactivePowerMvar": 40
+          "reactivePowerMvar": 40,
+          "customerType": "Industrial"
         }
       },
       "measured": {
