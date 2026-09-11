@@ -25,20 +25,28 @@ export const BaseNode: React.FC<BaseNodeProps> = ({ data, icon, accentColorClass
       : '';
 
   const customerType = (data.params as any)?.customerType;
+
+  // Border color driven by customer type; falls back to component accent if unset
+  const borderClass =
+    customerType === 'Industrial'  ? 'border-red-600'   :
+    customerType === 'Commercial'  ? 'border-green-600'  :
+    customerType === 'Residential' ? 'border-blue-600'   :
+    accentColorClass;
+
   let custBadge: { text: string; className: string } | null = null;
   if (customerType === 'Residential') {
     custBadge = { text: 'Residential', className: 'bg-blue-100 text-blue-700 border-blue-200' };
   } else if (customerType === 'Industrial') {
-    custBadge = { text: 'Industrial', className: 'bg-amber-100 text-amber-700 border-amber-200' };
+    custBadge = { text: 'Industrial', className: 'bg-red-100 text-red-700 border-red-200' };
   } else if (customerType === 'Commercial') {
-    custBadge = { text: 'Commercial', className: 'bg-emerald-100 text-emerald-700 border-emerald-200' };
+    custBadge = { text: 'Commercial', className: 'bg-green-100 text-green-700 border-green-200' };
   }
 
   return (
     <div
       className={[
         'relative min-w-[140px] rounded-lg border-2 bg-white shadow-md px-3 py-2',
-        accentColorClass,
+        borderClass,
         stateRing,
         selected ? 'shadow-lg scale-[1.02]' : '',
         'transition-all duration-150',

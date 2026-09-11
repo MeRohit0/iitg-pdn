@@ -44,13 +44,20 @@ export const DotNode: React.FC<DotNodeProps> = ({ data, selected }) => {
       ? 'ring-2 ring-emerald-400'
       : 'ring-1 ring-slate-300';
 
+  // Ring color: customer type takes priority, energization state is fallback
+  const custRing =
+    params.customerType === 'Industrial'  ? 'ring-2 ring-red-600'   :
+    params.customerType === 'Commercial'  ? 'ring-2 ring-green-600'  :
+    params.customerType === 'Residential' ? 'ring-2 ring-blue-600'   :
+    ringClass;
+
   let custBadge: { text: string; className: string } | null = null;
   if (params.customerType === 'Residential') {
-    custBadge = { text: 'R', className: 'bg-blue-600 text-white' };
+    custBadge = { text: 'R', className: 'bg-blue-800 text-white' };
   } else if (params.customerType === 'Industrial') {
-    custBadge = { text: 'I', className: 'bg-amber-600 text-white' };
+    custBadge = { text: 'I', className: 'bg-red-800 text-white' };
   } else if (params.customerType === 'Commercial') {
-    custBadge = { text: 'C', className: 'bg-emerald-600 text-white' };
+    custBadge = { text: 'C', className: 'bg-green-800 text-white' };
   }
 
   return (
@@ -60,7 +67,7 @@ export const DotNode: React.FC<DotNodeProps> = ({ data, selected }) => {
       <div
         className={[
           'relative flex items-center justify-center h-7 w-7 rounded-full bg-slate-900 transition-transform z-10',
-          ringClass,
+          custRing,
           selected ? 'scale-110 ring-2 ring-indigo-500' : '',
         ].join(' ')}
       >
