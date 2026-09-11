@@ -1,23 +1,23 @@
 # Project-PDN
 
-> Interactive Power Distribution Network canvas with client-side BFS load flow — built for the IITG Predoc research programme.
+> Interactive Power Distribution Network canvas with client-side Backward-Forward Sweep (BFS) load flow and 24-hour time-series analytics — built for the IITG Predoc research programme.
 
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white&labelColor=20232a)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![React Flow](https://img.shields.io/badge/React_Flow-12-FF0072)](https://reactflow.dev)
+[![Plotly.js](https://img.shields.io/badge/Plotly.js-2.35-3F4F75?logo=plotly&logoColor=white)](https://plotly.com/javascript/)
 
 **Author:** [@merohit0](https://github.com/merohit0)
 
 ---
 
-<!-- Add a screenshot here once ready: ![Project-PDN canvas](./screenshot.png) -->
-> 📸 _Screenshot coming soon — take one of the 33-bus canvas with colored lines and drop it here as `screenshot.png`._
 ![Screenshot of frontend](image.png)
+
 ---
 
-Draw a radial distribution network on a drag-and-drop canvas, enter per-bus load (P/Q) and per-line impedance (R/X), and click **Run Optimization** to run a client-side BFS load flow. Results are overlaid directly on the canvas — buses show voltage, lines show loading percentage color-coded green → amber → red. No backend required.
+Draw a radial distribution network on an interactive drag-and-drop canvas, enter per-bus load ($P/Q$) and per-line impedance ($R/X$), and run client-side **BFS load flow** and **24-hour time-series analytics**. Results are overlaid directly on the canvas — buses show voltage, lines show loading percentage color-coded green → amber → red. No backend server required.
 
 ---
 
@@ -28,167 +28,184 @@ Draw a radial distribution network on a drag-and-drop canvas, enter per-bus load
 
 ---
 
-## Quick start
+## Quick Start
 
 ```bash
+cd pdn-frontend
 npm install
 npm run dev
 ```
 
-Open the printed local URL (typically `http://localhost:5173`). The canvas loads with the **IEEE 33-bus radial distribution test feeder** — click **Run Optimization** to run the BFS load flow, color the edges by loading status, and populate the Results Panel.
+Open the local URL (typically `http://localhost:5173`). The canvas loads with the **IEEE 33-bus radial distribution test feeder**.
+- Click **Run Optimization** to execute the instantaneous BFS power flow.
+- Click **Analytics** (📈 icon) to open the **24-Hour Time-Series BFS Analytics & Profiles** suite.
 
 ```bash
-# Production build
+# Production build & verification
 npm run build
-npm run preview   # serve the dist/ folder locally to verify
+npm run preview   # serve the dist/ folder locally
 ```
 
 ---
 
-## Features
+## Key Features
 
 | Feature | Details |
 |---|---|
-| Drag-and-drop canvas | Pan, zoom, add / move / delete nodes and connections |
-| 6 component types | Substation, Transformer, Generator, Load, Feeder, Node |
-| BFS load flow | Per-bus voltages, line currents, losses, and loading % |
-| Color-coded lines | Green / amber / red by loading; manual color override |
-| Results Panel | Post-solve summary chips: total losses, min voltage, max loading |
-| Import / Export | Save and load topology as `.json`; clipboard paste supported |
-| Auto-persistence | Every edit saved to `localStorage` — survives page reload |
+| **Drag-and-Drop Canvas** | Pan, zoom, add / move / delete nodes and branches with 4-side orthogonal routing handles. |
+| **6 Component Types** | Substation (slack bus), Transformer, Generator, Load, Feeder junction, and generic Node dots. |
+| **Instantaneous BFS Solver** | Backward-Forward Sweep power flow calculating bus voltages ($p.u.$), line currents, power losses, and loading %. |
+| **Dynamic Line Loading Colors** | Real-time color coding: Green (<85%), Amber (85–99%), Red (≥100% overload). Manual overrides supported. |
+| **24-Hour Time-Series Engine** | Multi-interval BFS solver across 96 time-steps (15-min intervals) with per-node customer multipliers. |
+| **2D Feeder & Bus Voltage Analytics** | Feeder voltage drop profiles with 24h scrubber, plus single-bus 24-hour voltage profiles with bus-navigation slider. |
+| **3D Network Voltage Surface** | High-performance WebGL 3D surface plot ($X$: Bus, $Y$: Time, $Z$: Voltage) with interactive rotate, pan, and zoom. |
+| **Energy Losses & Demand Profiles** | 24-hour cumulative energy loss ($kWh$), peak system losses ($kW$), and total network active/reactive demand curves. |
+| **Multipliers & Data Manager** | Custom 96-interval JSON load curve upload/download and full 96-step simulation CSV export. |
+| **Auto-Persistence** | Entire canvas topology, parameters, and colors automatically saved to `localStorage`. |
 
 ---
 
-## Component types
+## 24-Hour Time-Series Analytics Suite
 
-| Type | Rendering | Key properties |
+The analytics modal provides distribution engineers and researchers with time-series operational insights:
+
+### 1. 2D Voltage Graphs
+- **Feeder Profile Mode (Time $t$)**: Displays the voltage profile along the entire feeder from the substation to lateral branch ends at any 15-minute interval. Features:
+  - Playback animation (`▶ Play 24h` / `⏸ Pause`) to watch voltage profiles fluctuate through daily load cycles.
+  - Variable playback speeds (**1x**, **2x**, **4x**) with stable frame pacing.
+  - Active customer multiplier indicators for Residential, Industrial, and Commercial classes.
+- **Single Bus (24h) Profile Mode**: Displays the continuous 24-hour voltage curve for any individual bus against statutory limits (0.95 and 1.05 $p.u.$). Features:
+  - Context-aware **Base Node Navigation Bar** with `◀ Prev Bus` and `Next Bus ▶` buttons.
+  - **Bus Range Slider** for rapid scrubbing across all 33 network buses.
+  - `⭐ Jump to Critical Bus` button to immediately focus on the bus with the lowest 24h voltage.
+  - Real-time bus metadata badge: Customer Type, Base $P$ ($kW$), Base $Q$ ($kVAr$), and 24h minimum voltage.
+
+### 2. 3D Network Voltage Surface
+- Interactive WebGL surface mapping the entire network state across space and time:
+  - **X-Axis**: Bus / Node Number (Bus 1 to Bus 33)
+  - **Y-Axis**: Time of Day (00:15 to 24:00 across 96 intervals)
+  - **Z-Axis**: Voltage Magnitude ($p.u.$)
+- Rendered with standard **Viridis** colormap, depth contour projections, and hover tooltips showing bus, clock time, and exact voltage.
+
+### 3. Daily Losses & Demand
+- Plots active power losses ($kW$) over 24 hours and calculates cumulative energy loss ($kWh$).
+- Dual-axis curve tracking aggregate customer active demand ($kW$) and reactive demand ($kVAr$) across the day.
+- Highlights peak loss time and peak system demand intervals.
+
+### 4. Multipliers & Results Data
+- Integrated JSON editor to customize or inspect the 96 load multipliers ($R_{\text{load}}$, $I_{\text{load}}$, $C_{\text{load}}$).
+- File upload/download for scenario files.
+- **Export CSV Results**: Download complete per-bus voltage matrices, critical buses, and feeder metrics across all 96 intervals in a single click.
+
+---
+
+## Customer Load Modeling
+
+Nodes are classified into customer classes reflecting realistic daily consumption patterns:
+- **Residential**: Peaks in the evening (18:00–22:00) and early morning.
+- **Commercial**: Peaks during business hours (09:00–18:00).
+- **Industrial**: High base load during morning/afternoon production shifts.
+- **Substation / Slack**: Zero self-demand; feeds the network at fixed 1.0 $p.u.$ reference voltage.
+
+Each node's demand is scaled at interval $t$ by its customer class multiplier:
+$$P_i(t) = P_{\text{base}, i} \times \text{Multiplier}_{\text{customer}, i}(t)$$
+$$Q_i(t) = Q_{\text{base}, i} \times \text{Multiplier}_{\text{customer}, i}(t)$$
+
+---
+
+## Recent Updates & Progress
+
+- [x] **Streamlined Top Toolbar**: Removed legacy manual scaling input fields to keep the UI clean, modern, and focused on essential network metrics.
+- [x] **Context-Aware 2D Bottom Navigation**:
+  - Automatically switches between **Time Scrubber** (in Feeder Profile mode) and **Base Node Scrubber & Controls** (in Single Bus mode).
+  - Added Prev/Next bus buttons, a 1–33 bus range slider, and instant "Jump to Critical Bus" navigation.
+- [x] **Smooth Animation Engine**:
+  - Fixed animation playback speed controls (`1x`, `2x`, `4x`).
+  - Implemented step-pacing at a stable 160 ms interval to eliminate Plotly redraw bottlenecks and UI lag.
+- [x] **Refined 3D Graph**:
+  - Removed clutter (extra metric/palette toggles) in favor of a clean, dedicated 3D voltage surface view.
+  - Added explicit $X, Y, Z$ axis parameter tags and rotation tips.
+- [x] **X-Axis Tick Formatting**: Cleaned up 24-hour time labels with 2-hour interval spacing (`nticks: 13`) to prevent text overlap.
+
+---
+
+## Component Types
+
+| Type | Rendering | Key Properties |
 |---|---|---|
-| **Substation** | **red vertical bar** (single-line-diagram convention) | base voltage, slack-bus flag, max import |
-| Transformer | full card | rated power, primary/secondary voltage, impedance, tap ratio |
-| Generator | full card | max/min P & Q, generation cost |
-| Load | full card | active/reactive power demand, critical flag |
-| Feeder | full card | base voltage only (plain junction) |
-| **Node** | **small black circle, bus number inside it** | active power (P), reactive power (Q) |
+| **Substation** | **Red vertical bar** (SLD convention) | Base voltage, slack-bus flag, max import capacity |
+| **Node** | **Small dark circle with bus label** | Active power ($P$), reactive power ($Q$), customer class |
+| **Transformer** | Component card | Rated power, primary/secondary voltage, impedance, tap ratio |
+| **Generator** | Component card | Max/min $P$ and $Q$, generation cost |
+| **Load** | Component card | Active/reactive demand, critical load flag |
+| **Feeder** | Component card | Base voltage, junction descriptor |
 
-`Node` is the one to reach for in dense networks — e.g. 30+ buses and 100+ lines — where rendering every point as a full labeled card makes the canvas unreadable. It's a generic bus: hover it for a tooltip with its label/voltage/P/Q, double-click it for the full inspector, same as any other node — it just doesn't take up card-sized space on the canvas.
-
----
-
-## Default demo topology
-
-The canvas loads with the **IEEE 33-bus radial distribution test feeder** (Baran & Wu, 1989) — bus 1 is the substation (red bar), buses 2–33 are generic `Node` dots, wired with the standard 32-branch radial tree (main feeder 1→11, a zigzag 11→18, and lateral branches at 2, 3, and 6). Bus numbers are shown right under each dot, following the single-line-diagram convention.
-
-Real per-bus load (P/Q) and per-line impedance (R/X) are not hardcoded — each bus defaults to 0 MW/MVAr and each line to a placeholder R/X. Double-click any bus or line to enter actual data through the inspector.
-
-If you already have a saved layout (see [Persistence](#persistence)), reloading the page will keep showing it, not this default. Hit **Reset** (top-right) to switch back to the 33-bus topology.
+`Node` is designed for dense topologies (e.g. 33+ buses and 32+ lines) where card-sized elements clutter the canvas. Hover over any node for a quick summary tooltip, or double-click to edit parameters in the Inspector.
 
 ---
 
-## Interacting with the canvas
+## Default Demo Topology
 
-- **Add a node** — click a type in the "Add node" panel (top-left) to arm it (the button highlights and a banner appears), then click anywhere on the canvas to drop the node there. Click the same button again, or press `Esc`, to cancel.
-- **Connect nodes** — drag from any of the 4 handles around a node (top, right, bottom, left) to any handle on another node. Connections aren't restricted to a fixed direction — drag from whichever side is closest to the other node and it routes that way.
-- **Delete** — select a node or line (click) and press `Delete` / `Backspace`, or click a line and use the small ✕ button that appears at its midpoint.
-- **Edit node properties** — double-click it to open the inspector sidebar (right side). Each component type shows its own fields: load MW/MVAr, generator P/Q limits and cost, transformer ratings, substation slack-bus flag. The generic **Node** shows just P and Q, kept intentionally minimal.
-- **Edit line properties** — double-click a line to open its sidebar: resistance (R), reactance (X), and a **color** picker (preset swatches, custom hex input, or "A" to reset to automatic status coloring). Color is a purely visual override and never feeds into the solver.
-
----
-
-## Line loading %
-
-After running **Run Optimization**, each power line displays a small label at its midpoint showing a **loading percentage** — a standard power-systems metric:
-
-> **Loading (%)** = (Apparent power flowing through the line ÷ Line's rated capacity) × 100
-
-It tells you how "full" a line is relative to its thermal / rated limit.
-
-### Visual encoding
-
-| Loading | Edge color | Stroke width | Meaning |
-|---|---|---|---|
-| Not yet solved | Grey | 2 px | Unsolved / idle |
-| < 85 % | Green | 2 px | Normal operation |
-| 85 – 99 % | Amber | 3.5 px | Near capacity — watch this line |
-| ≥ 100 % | Red | 5 px | **Overloaded** — exceeds rated limit |
-| De-energized | Light grey, dashed | 2 px | Line is open / switched out |
-
-The percentage is printed in **bold indigo** just above the R/X label at the midpoint. A manually chosen color overrides the status color, but the underlying loading value and status are unchanged.
-
-Threshold constants (85 % warning, 100 % overload) live in `src/utils/mockSolver.ts` and `src/utils/bfsSolver.ts` — adjustable without touching any UI code.
-
----
-
-## Solvers
-
-Two client-side solvers are bundled; neither makes any network requests.
-
-| File | Algorithm | Notes |
-|---|---|---|
-| `mockSolver.ts` | BFS demand aggregation | Fast approximation; propagates active-power totals from leaves to root, assigns loading % based on a fixed nominal capacity |
-| `bfsSolver.ts` | BFS load flow with complex arithmetic | Full V·I\* apparent-power calculation using per-branch R + jX impedances; computes per-bus voltages, line currents, losses, and loading % |
-
-`bfsSolver.ts` is the primary, more accurate solver and feeds the **Results Panel** summary chips.
-
----
-
-## Import / Export
-
-Click **Import / Export** (top-right) for a small modal:
-
-- **Export** — download the current graph as a `.json` file, or copy it straight to the clipboard. Positions, parameters, colors — everything — goes with it; transient solve results are stripped since a saved file should represent the topology, not a stale snapshot.
-- **Import** — pick a `.json` file, or paste JSON directly into the textarea. Either way it is validated before anything changes on screen (unknown component types, dangling edge references, duplicate IDs, and malformed JSON all produce a specific error message). On success, the canvas is replaced, re-framed into view, and autosaved to `localStorage`.
-
-`src/utils/graphImportExport.ts` exports `serializeGraph(nodes, edges)`, which is exactly the JSON shape a `POST /api/solve` body would need when wiring to a real backend.
-
----
-
-## Persistence
-
-Every change to the canvas — nodes, connections, positions, colors, edited parameters, the last solve result — is written to `localStorage` on the fly (`src/utils/graphPersistence.ts`). Reload the page or reopen the tab and it comes back exactly as you left it. Use the **Reset** button (top-right) to clear the saved state and restore the default demo topology.
-
-This is per-browser, client-side storage — it does not sync across devices or browsers, and clearing site data or using a private window will lose it.
-
----
-
-## Known limitations
-
-- **Radial networks only.** The BFS solver assumes a tree topology rooted at the substation. Meshed networks (rings, tie switches) are not supported and will produce incorrect results.
-- **I_max not editable.** Line rated capacity defaults to a fixed value and is not exposed in the UI, so loading % is relative to this default, not real conductor ratings.
-- **Single substation.** Multi-slack or multi-feeder topologies are not modelled.
+The application initializes with the standard **IEEE 33-bus radial distribution test feeder** (Baran & Wu, 1989):
+- **Bus 1**: Substation (red vertical bar at $(0, 2)$).
+- **Buses 2–33**: Distribution nodes with 32 radial branches.
+- **Main Feeder**: Buses 1 → 11 and 11 → 18.
+- **Lateral Branches**: Peel off north (buses 5–6–26–33 and 3–23–25) and south (buses 2–19–22).
+- **Customer Zoning**: Initialized with mixed Residential, Industrial, and Commercial bus assignments.
 
 ---
 
 ## Architecture
 
 ```
-src/
-├── types/graph.types.ts        # shared node/edge/result types
-├── utils/
-│   ├── graphValidation.ts      # orphan/connectivity checks (client-side)
-│   ├── mockSolver.ts           # fast BFS demand-aggregation approximation
-│   ├── bfsSolver.ts            # full BFS load flow with complex V·I* arithmetic
-│   ├── nodeDefaults.ts         # per-type labels/icons/default params
-│   ├── graphPersistence.ts     # localStorage save/load/clear
-│   └── graphImportExport.ts    # JSON serialize + validated parse for import/export
-├── components/
-│   ├── nodes/                  # Substation, Node, Transformer, Generator, Load, Feeder
-│   │   └── FourSideHandles.tsx # shared top/right/bottom/left connection handles
-│   ├── edges/
-│   │   └── PowerLineEdge.tsx   # status-colored + user-recolorable line rendering
-│   └── canvas/
-│       ├── TopologyCanvas.tsx
-│       ├── NodePalette.tsx         # "Add node" panel
-│       ├── NodeInspectorPanel.tsx  # double-click-a-node sidebar
-│       ├── EdgeInspectorPanel.tsx  # double-click-a-line sidebar (R, X, color)
-│       ├── ResultsPanel.tsx        # post-solve summary chips (losses, voltages, loading)
-│       └── GraphIOPanel.tsx        # Import/Export modal
-├── App.tsx                     # IEEE 33-bus demo topology + page shell
-└── main.tsx
+pdn-frontend/
+├── src/
+│   ├── types/
+│   │   └── graph.types.ts            # Shared node, edge, and solver types
+│   ├── utils/
+│   │   ├── bfsSolver.ts              # Instantaneous BFS power flow solver
+│   │   ├── timeSeriesBfsSolver.ts    # 24-hour multi-interval BFS solver engine
+│   │   ├── graphValidation.ts        # Connectivity and radiality checks
+│   │   ├── graphPersistence.ts       # LocalStorage auto-persistence
+│   │   └── graphImportExport.ts      # JSON topology serialization & import
+│   ├── data/
+│   │   └── defaultTimeSeriesData.ts  # Standard 96-interval load profile dataset
+│   ├── components/
+│   │   ├── analytics/
+│   │   │   ├── PlotlyChart.tsx               # Reactive wrapper for Plotly 2D & WebGL 3D
+│   │   │   └── TimeSeriesAnalyticsModal.tsx  # 2D/3D charts, loss analytics, data manager
+│   │   ├── canvas/
+│   │   │   ├── TopologyCanvas.tsx      # Main React Flow network canvas
+│   │   │   ├── NodePalette.tsx         # Component creation tool palette
+│   │   │   ├── NodeInspectorPanel.tsx  # Per-bus parameter inspector
+│   │   │   ├── EdgeInspectorPanel.tsx  # Branch impedance ($R/X$) and color editor
+│   │   │   ├── ResultsPanel.tsx        # Post-solve instantaneous metrics summary
+│   │   │   └── GraphIOPanel.tsx        # JSON topology import / export modal
+│   │   ├── nodes/                      # Custom node renderers (Substation, Node dot, cards)
+│   │   └── edges/                      # Custom branch renderers (PowerLineEdge)
+│   ├── App.tsx                         # IEEE 33-bus topology initialization & layout
+│   └── main.tsx
 ```
 
 ---
 
-## Reference
+## Research Progress & Roadmap
 
-> M. E. Baran and F. F. Wu, "Network reconfiguration in distribution systems for loss reduction and load balancing," *IEEE Transactions on Power Delivery*, vol. 4, no. 2, pp. 1401–1407, Apr. 1989.
+- [x] **Milestone 1**: Drag-and-drop radial distribution network builder with React Flow.
+- [x] **Milestone 2**: Client-side Backward-Forward Sweep (BFS) power flow implementation.
+- [x] **Milestone 3**: IEEE 33-bus benchmark topology integration with SLD layout.
+- [x] **Milestone 4**: 24-hour time-series BFS solver with 96 discrete 15-minute intervals.
+- [x] **Milestone 5**: 2D Feeder profile animations and Single-bus 24h curve inspection.
+- [x] **Milestone 6**: 3D WebGL network voltage surface visualization.
+- [x] **Milestone 7**: UI/UX refinement — context-aware bottom bar, stable speed controls, decluttered header.
+- [ ] **Milestone 8** *(Upcoming)*: Distributed Energy Resource (DER) & Solar PV penetration curves.
+- [ ] **Milestone 9** *(Upcoming)*: Electric Vehicle (EV) charging profile integration and stress analysis.
+- [ ] **Milestone 10** *(Upcoming)*: Network reconfiguration (tie-switch optimization) for loss minimization.
+
+---
+
+## References
+
+1. M. E. Baran and F. F. Wu, *"Network reconfiguration in distribution systems for load balancing,"* IEEE Transactions on Power Delivery, vol. 4, no. 2, pp. 1401–1407, Apr. 1989.
+2. D. Shirmohammadi, H. W. Hong, A. Semlyen, and G. X. Luo, *"A compensation-based power flow approach for weakly meshed distribution and transmission networks,"* IEEE Transactions on Power Systems, vol. 3, no. 2, pp. 753–762, May 1988.
 
