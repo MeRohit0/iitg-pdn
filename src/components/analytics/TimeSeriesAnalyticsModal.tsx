@@ -24,9 +24,9 @@ type LossViewMode = 'loss' | 'demand';
 
 const CUSTOMER_COLORS: Record<CustomerType, string> = {
   Residential: '#2563eb', // blue
-  Industrial: '#ea580c',  // orange
-  Commercial: '#059669',  // emerald
-  None: '#64748b',        // slate
+  Industrial:  '#dc2626', // red
+  Commercial:  '#16a34a', // green
+  None:        '#64748b', // slate
 };
 
 export const TimeSeriesAnalyticsModal: React.FC<TimeSeriesAnalyticsModalProps> = ({
@@ -319,8 +319,9 @@ export const TimeSeriesAnalyticsModal: React.FC<TimeSeriesAnalyticsModalProps> =
     },
     autosize: true,
     scene: {
-      xaxis: { title: 'X: Bus / Node Number', gridcolor: '#cbd5e1' },
-      yaxis: { title: 'Y: Time of Day (24h)', gridcolor: '#cbd5e1' },
+      aspectmode: 'cube',
+      xaxis: { title: 'X: Bus / Node Number', gridcolor: '#cbd5e1', autorange: 'reversed' },
+      yaxis: { title: 'Y: Time of Day (24h)', gridcolor: '#cbd5e1', autorange: 'reversed'},
       zaxis: { title: 'Z: Voltage Magnitude (p.u.)', gridcolor: '#cbd5e1' },
       camera: {
         eye: { x: 1.6, y: -1.7, z: 1.2 },
@@ -717,10 +718,10 @@ export const TimeSeriesAnalyticsModal: React.FC<TimeSeriesAnalyticsModalProps> =
                     <span className="inline-block w-2.5 h-2.5 rounded-full bg-blue-600" /> Residential Node
                   </span>
                   <span className="flex items-center gap-1">
-                    <span className="inline-block w-2.5 h-2.5 rounded-full bg-orange-600" /> Industrial Node
+                    <span className="inline-block w-2.5 h-2.5 rounded-full bg-red-600" /> Industrial Node
                   </span>
                   <span className="flex items-center gap-1">
-                    <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-600" /> Commercial Node
+                    <span className="inline-block w-2.5 h-2.5 rounded-full bg-green-600" /> Commercial Node
                   </span>
                   <span className="flex items-center gap-1">
                     <span className="inline-block w-2.5 h-2.5 rounded-full bg-slate-500" /> Substation / Slack
