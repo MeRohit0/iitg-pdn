@@ -1,0 +1,2697 @@
+{
+  "schemaVersion": 1,
+  "nodes": [
+    {
+      "id": "1",
+      "type": "transportNode",
+      "position": {
+        "x": 420.0,
+        "y": 20.0
+      },
+      "data": {
+        "label": "1",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "2",
+      "type": "transportNode",
+      "position": {
+        "x": 468.8,
+        "y": 23.8
+      },
+      "data": {
+        "label": "2",
+        "isEvChargingStation": true,
+        "voltageKv": 0.4,
+        "powerDrawKw": 50.0
+      }
+    },
+    {
+      "id": "3",
+      "type": "transportNode",
+      "position": {
+        "x": 516.6,
+        "y": 34.9
+      },
+      "data": {
+        "label": "3",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "4",
+      "type": "transportNode",
+      "position": {
+        "x": 562.0,
+        "y": 53.2
+      },
+      "data": {
+        "label": "4",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "5",
+      "type": "transportNode",
+      "position": {
+        "x": 604.1,
+        "y": 78.3
+      },
+      "data": {
+        "label": "5",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "6",
+      "type": "transportNode",
+      "position": {
+        "x": 641.9,
+        "y": 109.4
+      },
+      "data": {
+        "label": "6",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "7",
+      "type": "transportNode",
+      "position": {
+        "x": 674.5,
+        "y": 146.0
+      },
+      "data": {
+        "label": "7",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "8",
+      "type": "transportNode",
+      "position": {
+        "x": 701.1,
+        "y": 187.1
+      },
+      "data": {
+        "label": "8",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "9",
+      "type": "transportNode",
+      "position": {
+        "x": 721.2,
+        "y": 231.8
+      },
+      "data": {
+        "label": "9",
+        "isEvChargingStation": true,
+        "voltageKv": 0.4,
+        "powerDrawKw": 50.0
+      }
+    },
+    {
+      "id": "10",
+      "type": "transportNode",
+      "position": {
+        "x": 734.1,
+        "y": 279.1
+      },
+      "data": {
+        "label": "10",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "11",
+      "type": "transportNode",
+      "position": {
+        "x": 739.8,
+        "y": 327.7
+      },
+      "data": {
+        "label": "11",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "12",
+      "type": "transportNode",
+      "position": {
+        "x": 737.9,
+        "y": 376.7
+      },
+      "data": {
+        "label": "12",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "13",
+      "type": "transportNode",
+      "position": {
+        "x": 728.6,
+        "y": 424.8
+      },
+      "data": {
+        "label": "13",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "14",
+      "type": "transportNode",
+      "position": {
+        "x": 712.0,
+        "y": 470.9
+      },
+      "data": {
+        "label": "14",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "15",
+      "type": "transportNode",
+      "position": {
+        "x": 688.6,
+        "y": 513.9
+      },
+      "data": {
+        "label": "15",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "16",
+      "type": "transportNode",
+      "position": {
+        "x": 658.9,
+        "y": 552.9
+      },
+      "data": {
+        "label": "16",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "17",
+      "type": "transportNode",
+      "position": {
+        "x": 623.6,
+        "y": 586.9
+      },
+      "data": {
+        "label": "17",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "18",
+      "type": "transportNode",
+      "position": {
+        "x": 583.5,
+        "y": 615.1
+      },
+      "data": {
+        "label": "18",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "19",
+      "type": "transportNode",
+      "position": {
+        "x": 539.6,
+        "y": 636.8
+      },
+      "data": {
+        "label": "19",
+        "isEvChargingStation": true,
+        "voltageKv": 0.4,
+        "powerDrawKw": 50.0
+      }
+    },
+    {
+      "id": "20",
+      "type": "transportNode",
+      "position": {
+        "x": 492.9,
+        "y": 651.6
+      },
+      "data": {
+        "label": "20",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "21",
+      "type": "transportNode",
+      "position": {
+        "x": 444.5,
+        "y": 659.1
+      },
+      "data": {
+        "label": "21",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "22",
+      "type": "transportNode",
+      "position": {
+        "x": 395.5,
+        "y": 659.1
+      },
+      "data": {
+        "label": "22",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "23",
+      "type": "transportNode",
+      "position": {
+        "x": 347.1,
+        "y": 651.6
+      },
+      "data": {
+        "label": "23",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "24",
+      "type": "transportNode",
+      "position": {
+        "x": 300.4,
+        "y": 636.8
+      },
+      "data": {
+        "label": "24",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "25",
+      "type": "transportNode",
+      "position": {
+        "x": 256.5,
+        "y": 615.1
+      },
+      "data": {
+        "label": "25",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "26",
+      "type": "transportNode",
+      "position": {
+        "x": 216.4,
+        "y": 586.9
+      },
+      "data": {
+        "label": "26",
+        "isEvChargingStation": true,
+        "voltageKv": 0.4,
+        "powerDrawKw": 50.0
+      }
+    },
+    {
+      "id": "27",
+      "type": "transportNode",
+      "position": {
+        "x": 181.1,
+        "y": 552.9
+      },
+      "data": {
+        "label": "27",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "28",
+      "type": "transportNode",
+      "position": {
+        "x": 151.4,
+        "y": 513.9
+      },
+      "data": {
+        "label": "28",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "29",
+      "type": "transportNode",
+      "position": {
+        "x": 128.0,
+        "y": 470.9
+      },
+      "data": {
+        "label": "29",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "30",
+      "type": "transportNode",
+      "position": {
+        "x": 111.4,
+        "y": 424.8
+      },
+      "data": {
+        "label": "30",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "31",
+      "type": "transportNode",
+      "position": {
+        "x": 102.1,
+        "y": 376.7
+      },
+      "data": {
+        "label": "31",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "32",
+      "type": "transportNode",
+      "position": {
+        "x": 100.2,
+        "y": 327.7
+      },
+      "data": {
+        "label": "32",
+        "isEvChargingStation": true,
+        "voltageKv": 0.4,
+        "powerDrawKw": 50.0
+      }
+    },
+    {
+      "id": "33",
+      "type": "transportNode",
+      "position": {
+        "x": 105.9,
+        "y": 279.1
+      },
+      "data": {
+        "label": "33",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "34",
+      "type": "transportNode",
+      "position": {
+        "x": 118.8,
+        "y": 231.8
+      },
+      "data": {
+        "label": "34",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "35",
+      "type": "transportNode",
+      "position": {
+        "x": 138.9,
+        "y": 187.1
+      },
+      "data": {
+        "label": "35",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "36",
+      "type": "transportNode",
+      "position": {
+        "x": 165.5,
+        "y": 146.0
+      },
+      "data": {
+        "label": "36",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "37",
+      "type": "transportNode",
+      "position": {
+        "x": 198.1,
+        "y": 109.4
+      },
+      "data": {
+        "label": "37",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "38",
+      "type": "transportNode",
+      "position": {
+        "x": 235.9,
+        "y": 78.3
+      },
+      "data": {
+        "label": "38",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "39",
+      "type": "transportNode",
+      "position": {
+        "x": 278.0,
+        "y": 53.2
+      },
+      "data": {
+        "label": "39",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    },
+    {
+      "id": "40",
+      "type": "transportNode",
+      "position": {
+        "x": 323.4,
+        "y": 34.9
+      },
+      "data": {
+        "label": "40",
+        "isEvChargingStation": true,
+        "voltageKv": 0.4,
+        "powerDrawKw": 50.0
+      }
+    },
+    {
+      "id": "41",
+      "type": "transportNode",
+      "position": {
+        "x": 371.2,
+        "y": 23.8
+      },
+      "data": {
+        "label": "41",
+        "isEvChargingStation": false,
+        "voltageKv": 0.4,
+        "powerDrawKw": 0.0
+      }
+    }
+  ],
+  "roads": [
+    {
+      "id": "road-1",
+      "source": "1",
+      "target": "2",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 1,
+        "roadType": "T2",
+        "label": "R1"
+      }
+    },
+    {
+      "id": "road-2",
+      "source": "1",
+      "target": "3",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 2,
+        "roadType": "T1",
+        "label": "R2"
+      }
+    },
+    {
+      "id": "road-3",
+      "source": "1",
+      "target": "4",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 3,
+        "roadType": "T1",
+        "label": "R3"
+      }
+    },
+    {
+      "id": "road-4",
+      "source": "2",
+      "target": "3",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 4,
+        "roadType": "T1",
+        "label": "R4"
+      }
+    },
+    {
+      "id": "road-5",
+      "source": "2",
+      "target": "5",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 5,
+        "roadType": "T1",
+        "label": "R5"
+      }
+    },
+    {
+      "id": "road-6",
+      "source": "3",
+      "target": "35",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 6,
+        "roadType": "T1",
+        "label": "R6"
+      }
+    },
+    {
+      "id": "road-7",
+      "source": "4",
+      "target": "5",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 7,
+        "roadType": "T1",
+        "label": "R7"
+      }
+    },
+    {
+      "id": "road-8",
+      "source": "4",
+      "target": "6",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 8,
+        "roadType": "T1",
+        "label": "R8"
+      }
+    },
+    {
+      "id": "road-9",
+      "source": "5",
+      "target": "6",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 9,
+        "roadType": "T2",
+        "label": "R9"
+      }
+    },
+    {
+      "id": "road-10",
+      "source": "5",
+      "target": "7",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 10,
+        "roadType": "T1",
+        "label": "R10"
+      }
+    },
+    {
+      "id": "road-11",
+      "source": "6",
+      "target": "7",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 11,
+        "roadType": "T2",
+        "label": "R11"
+      }
+    },
+    {
+      "id": "road-12",
+      "source": "6",
+      "target": "10",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 12,
+        "roadType": "T2",
+        "label": "R12"
+      }
+    },
+    {
+      "id": "road-13",
+      "source": "7",
+      "target": "8",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 13,
+        "roadType": "T2",
+        "label": "R13"
+      }
+    },
+    {
+      "id": "road-14",
+      "source": "7",
+      "target": "9",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 14,
+        "roadType": "T1",
+        "label": "R14"
+      }
+    },
+    {
+      "id": "road-15",
+      "source": "8",
+      "target": "41",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 15,
+        "roadType": "T2",
+        "label": "R15"
+      }
+    },
+    {
+      "id": "road-16",
+      "source": "9",
+      "target": "41",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 16,
+        "roadType": "T1",
+        "label": "R16"
+      }
+    },
+    {
+      "id": "road-17",
+      "source": "9",
+      "target": "10",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 17,
+        "roadType": "T1",
+        "label": "R17"
+      }
+    },
+    {
+      "id": "road-18",
+      "source": "10",
+      "target": "11",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 18,
+        "roadType": "T2",
+        "label": "R18"
+      }
+    },
+    {
+      "id": "road-19",
+      "source": "10",
+      "target": "36",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 19,
+        "roadType": "T1",
+        "label": "R19"
+      }
+    },
+    {
+      "id": "road-20",
+      "source": "11",
+      "target": "12",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 20,
+        "roadType": "T2",
+        "label": "R20"
+      }
+    },
+    {
+      "id": "road-21",
+      "source": "11",
+      "target": "21",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 21,
+        "roadType": "T3",
+        "label": "R21"
+      }
+    },
+    {
+      "id": "road-22",
+      "source": "12",
+      "target": "13",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 22,
+        "roadType": "T1",
+        "label": "R22"
+      }
+    },
+    {
+      "id": "road-23",
+      "source": "13",
+      "target": "14",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 23,
+        "roadType": "T3",
+        "label": "R23"
+      }
+    },
+    {
+      "id": "road-24",
+      "source": "13",
+      "target": "19",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 24,
+        "roadType": "T3",
+        "label": "R24"
+      }
+    },
+    {
+      "id": "road-25",
+      "source": "14",
+      "target": "15",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 25,
+        "roadType": "T3",
+        "label": "R25"
+      }
+    },
+    {
+      "id": "road-26",
+      "source": "14",
+      "target": "18",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 26,
+        "roadType": "T3",
+        "label": "R26"
+      }
+    },
+    {
+      "id": "road-27",
+      "source": "15",
+      "target": "16",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 27,
+        "roadType": "T3",
+        "label": "R27"
+      }
+    },
+    {
+      "id": "road-28",
+      "source": "15",
+      "target": "31",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 28,
+        "roadType": "T2",
+        "label": "R28"
+      }
+    },
+    {
+      "id": "road-29",
+      "source": "16",
+      "target": "17",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 29,
+        "roadType": "T3",
+        "label": "R29"
+      }
+    },
+    {
+      "id": "road-30",
+      "source": "16",
+      "target": "40",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 30,
+        "roadType": "T3",
+        "label": "R30"
+      }
+    },
+    {
+      "id": "road-31",
+      "source": "17",
+      "target": "18",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 31,
+        "roadType": "T3",
+        "label": "R31"
+      }
+    },
+    {
+      "id": "road-32",
+      "source": "17",
+      "target": "25",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 32,
+        "roadType": "T3",
+        "label": "R32"
+      }
+    },
+    {
+      "id": "road-33",
+      "source": "17",
+      "target": "27",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 33,
+        "roadType": "T3",
+        "label": "R33"
+      }
+    },
+    {
+      "id": "road-34",
+      "source": "18",
+      "target": "19",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 34,
+        "roadType": "T3",
+        "label": "R34"
+      }
+    },
+    {
+      "id": "road-35",
+      "source": "18",
+      "target": "24",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 35,
+        "roadType": "T3",
+        "label": "R35"
+      }
+    },
+    {
+      "id": "road-36",
+      "source": "19",
+      "target": "20",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 36,
+        "roadType": "T3",
+        "label": "R36"
+      }
+    },
+    {
+      "id": "road-37",
+      "source": "19",
+      "target": "23",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 37,
+        "roadType": "T3",
+        "label": "R37"
+      }
+    },
+    {
+      "id": "road-38",
+      "source": "20",
+      "target": "21",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 38,
+        "roadType": "T3",
+        "label": "R38"
+      }
+    },
+    {
+      "id": "road-39",
+      "source": "20",
+      "target": "22",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 39,
+        "roadType": "T3",
+        "label": "R39"
+      }
+    },
+    {
+      "id": "road-40",
+      "source": "21",
+      "target": "13",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 40,
+        "roadType": "T3",
+        "label": "R40"
+      }
+    },
+    {
+      "id": "road-41",
+      "source": "22",
+      "target": "23",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 41,
+        "roadType": "T1",
+        "label": "R41"
+      }
+    },
+    {
+      "id": "road-42",
+      "source": "22",
+      "target": "39",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 42,
+        "roadType": "T1",
+        "label": "R42"
+      }
+    },
+    {
+      "id": "road-43",
+      "source": "23",
+      "target": "24",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 43,
+        "roadType": "T1",
+        "label": "R43"
+      }
+    },
+    {
+      "id": "road-44",
+      "source": "24",
+      "target": "25",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 44,
+        "roadType": "T1",
+        "label": "R44"
+      }
+    },
+    {
+      "id": "road-45",
+      "source": "25",
+      "target": "27",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 45,
+        "roadType": "T1",
+        "label": "R45"
+      }
+    },
+    {
+      "id": "road-46",
+      "source": "26",
+      "target": "11",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 46,
+        "roadType": "T2",
+        "label": "R46"
+      }
+    },
+    {
+      "id": "road-47",
+      "source": "27",
+      "target": "28",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 47,
+        "roadType": "T1",
+        "label": "R47"
+      }
+    },
+    {
+      "id": "road-48",
+      "source": "28",
+      "target": "29",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 48,
+        "roadType": "T1",
+        "label": "R48"
+      }
+    },
+    {
+      "id": "road-49",
+      "source": "28",
+      "target": "40",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 49,
+        "roadType": "T2",
+        "label": "R49"
+      }
+    },
+    {
+      "id": "road-50",
+      "source": "29",
+      "target": "30",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 50,
+        "roadType": "T1",
+        "label": "R50"
+      }
+    },
+    {
+      "id": "road-51",
+      "source": "29",
+      "target": "35",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 51,
+        "roadType": "T1",
+        "label": "R51"
+      }
+    },
+    {
+      "id": "road-52",
+      "source": "30",
+      "target": "31",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 52,
+        "roadType": "T1",
+        "label": "R52"
+      }
+    },
+    {
+      "id": "road-53",
+      "source": "30",
+      "target": "32",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 53,
+        "roadType": "T2",
+        "label": "R53"
+      }
+    },
+    {
+      "id": "road-54",
+      "source": "32",
+      "target": "33",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 54,
+        "roadType": "T1",
+        "label": "R54"
+      }
+    },
+    {
+      "id": "road-55",
+      "source": "32",
+      "target": "35",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 55,
+        "roadType": "T1",
+        "label": "R55"
+      }
+    },
+    {
+      "id": "road-56",
+      "source": "32",
+      "target": "34",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 56,
+        "roadType": "T2",
+        "label": "R56"
+      }
+    },
+    {
+      "id": "road-57",
+      "source": "33",
+      "target": "34",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 57,
+        "roadType": "T1",
+        "label": "R57"
+      }
+    },
+    {
+      "id": "road-58",
+      "source": "34",
+      "target": "5",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 58,
+        "roadType": "T1",
+        "label": "R58"
+      }
+    },
+    {
+      "id": "road-59",
+      "source": "34",
+      "target": "8",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 59,
+        "roadType": "T2",
+        "label": "R59"
+      }
+    },
+    {
+      "id": "road-60",
+      "source": "4",
+      "target": "36",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 60,
+        "roadType": "T1",
+        "label": "R60"
+      }
+    },
+    {
+      "id": "road-61",
+      "source": "36",
+      "target": "37",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 61,
+        "roadType": "T1",
+        "label": "R61"
+      }
+    },
+    {
+      "id": "road-62",
+      "source": "37",
+      "target": "26",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 62,
+        "roadType": "T2",
+        "label": "R62"
+      }
+    },
+    {
+      "id": "road-63",
+      "source": "37",
+      "target": "39",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 63,
+        "roadType": "T1",
+        "label": "R63"
+      }
+    },
+    {
+      "id": "road-64",
+      "source": "26",
+      "target": "38",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 64,
+        "roadType": "T2",
+        "label": "R64"
+      }
+    },
+    {
+      "id": "road-65",
+      "source": "38",
+      "target": "39",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 65,
+        "roadType": "T2",
+        "label": "R65"
+      }
+    },
+    {
+      "id": "road-66",
+      "source": "9",
+      "target": "12",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 66,
+        "roadType": "T1",
+        "label": "R66"
+      }
+    },
+    {
+      "id": "road-67",
+      "source": "20",
+      "target": "38",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 67,
+        "roadType": "T2",
+        "label": "R67"
+      }
+    },
+    {
+      "id": "road-68",
+      "source": "31",
+      "target": "33",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 68,
+        "roadType": "T2",
+        "label": "R68"
+      }
+    },
+    {
+      "id": "road-69",
+      "source": "31",
+      "target": "41",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 69,
+        "roadType": "T1",
+        "label": "R69"
+      }
+    },
+    {
+      "id": "road-70",
+      "source": "30",
+      "target": "40",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 70,
+        "roadType": "T2",
+        "label": "R70"
+      }
+    },
+    {
+      "id": "road-71",
+      "source": "2",
+      "target": "1",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 71,
+        "roadType": "T2",
+        "label": "R71"
+      }
+    },
+    {
+      "id": "road-72",
+      "source": "3",
+      "target": "1",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 72,
+        "roadType": "T1",
+        "label": "R72"
+      }
+    },
+    {
+      "id": "road-73",
+      "source": "4",
+      "target": "1",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 73,
+        "roadType": "T1",
+        "label": "R73"
+      }
+    },
+    {
+      "id": "road-74",
+      "source": "3",
+      "target": "2",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 74,
+        "roadType": "T1",
+        "label": "R74"
+      }
+    },
+    {
+      "id": "road-75",
+      "source": "5",
+      "target": "2",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 75,
+        "roadType": "T1",
+        "label": "R75"
+      }
+    },
+    {
+      "id": "road-76",
+      "source": "35",
+      "target": "3",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 76,
+        "roadType": "T1",
+        "label": "R76"
+      }
+    },
+    {
+      "id": "road-77",
+      "source": "5",
+      "target": "4",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 77,
+        "roadType": "T1",
+        "label": "R77"
+      }
+    },
+    {
+      "id": "road-78",
+      "source": "6",
+      "target": "4",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 78,
+        "roadType": "T1",
+        "label": "R78"
+      }
+    },
+    {
+      "id": "road-79",
+      "source": "6",
+      "target": "5",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 79,
+        "roadType": "T2",
+        "label": "R79"
+      }
+    },
+    {
+      "id": "road-80",
+      "source": "7",
+      "target": "5",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 80,
+        "roadType": "T1",
+        "label": "R80"
+      }
+    },
+    {
+      "id": "road-81",
+      "source": "7",
+      "target": "6",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 81,
+        "roadType": "T2",
+        "label": "R81"
+      }
+    },
+    {
+      "id": "road-82",
+      "source": "10",
+      "target": "6",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 82,
+        "roadType": "T2",
+        "label": "R82"
+      }
+    },
+    {
+      "id": "road-83",
+      "source": "8",
+      "target": "7",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 83,
+        "roadType": "T2",
+        "label": "R83"
+      }
+    },
+    {
+      "id": "road-84",
+      "source": "9",
+      "target": "7",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 84,
+        "roadType": "T1",
+        "label": "R84"
+      }
+    },
+    {
+      "id": "road-85",
+      "source": "41",
+      "target": "8",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 85,
+        "roadType": "T2",
+        "label": "R85"
+      }
+    },
+    {
+      "id": "road-86",
+      "source": "41",
+      "target": "9",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 86,
+        "roadType": "T1",
+        "label": "R86"
+      }
+    },
+    {
+      "id": "road-87",
+      "source": "10",
+      "target": "9",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 87,
+        "roadType": "T1",
+        "label": "R87"
+      }
+    },
+    {
+      "id": "road-88",
+      "source": "11",
+      "target": "10",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 88,
+        "roadType": "T2",
+        "label": "R88"
+      }
+    },
+    {
+      "id": "road-89",
+      "source": "36",
+      "target": "10",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 89,
+        "roadType": "T1",
+        "label": "R89"
+      }
+    },
+    {
+      "id": "road-90",
+      "source": "12",
+      "target": "11",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 90,
+        "roadType": "T2",
+        "label": "R90"
+      }
+    },
+    {
+      "id": "road-91",
+      "source": "21",
+      "target": "11",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 91,
+        "roadType": "T3",
+        "label": "R91"
+      }
+    },
+    {
+      "id": "road-92",
+      "source": "13",
+      "target": "12",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 92,
+        "roadType": "T1",
+        "label": "R92"
+      }
+    },
+    {
+      "id": "road-93",
+      "source": "14",
+      "target": "13",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 93,
+        "roadType": "T3",
+        "label": "R93"
+      }
+    },
+    {
+      "id": "road-94",
+      "source": "19",
+      "target": "13",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 94,
+        "roadType": "T3",
+        "label": "R94"
+      }
+    },
+    {
+      "id": "road-95",
+      "source": "15",
+      "target": "14",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 95,
+        "roadType": "T3",
+        "label": "R95"
+      }
+    },
+    {
+      "id": "road-96",
+      "source": "18",
+      "target": "14",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 96,
+        "roadType": "T3",
+        "label": "R96"
+      }
+    },
+    {
+      "id": "road-97",
+      "source": "16",
+      "target": "15",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 97,
+        "roadType": "T3",
+        "label": "R97"
+      }
+    },
+    {
+      "id": "road-98",
+      "source": "31",
+      "target": "15",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 98,
+        "roadType": "T2",
+        "label": "R98"
+      }
+    },
+    {
+      "id": "road-99",
+      "source": "17",
+      "target": "16",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 99,
+        "roadType": "T3",
+        "label": "R99"
+      }
+    },
+    {
+      "id": "road-100",
+      "source": "40",
+      "target": "16",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 100,
+        "roadType": "T3",
+        "label": "R100"
+      }
+    },
+    {
+      "id": "road-101",
+      "source": "18",
+      "target": "17",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 101,
+        "roadType": "T3",
+        "label": "R101"
+      }
+    },
+    {
+      "id": "road-102",
+      "source": "25",
+      "target": "17",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 102,
+        "roadType": "T3",
+        "label": "R102"
+      }
+    },
+    {
+      "id": "road-103",
+      "source": "27",
+      "target": "17",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 103,
+        "roadType": "T3",
+        "label": "R103"
+      }
+    },
+    {
+      "id": "road-104",
+      "source": "19",
+      "target": "18",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 104,
+        "roadType": "T3",
+        "label": "R104"
+      }
+    },
+    {
+      "id": "road-105",
+      "source": "24",
+      "target": "18",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 105,
+        "roadType": "T3",
+        "label": "R105"
+      }
+    },
+    {
+      "id": "road-106",
+      "source": "20",
+      "target": "19",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 106,
+        "roadType": "T3",
+        "label": "R106"
+      }
+    },
+    {
+      "id": "road-107",
+      "source": "23",
+      "target": "19",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 107,
+        "roadType": "T3",
+        "label": "R107"
+      }
+    },
+    {
+      "id": "road-108",
+      "source": "21",
+      "target": "20",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 108,
+        "roadType": "T3",
+        "label": "R108"
+      }
+    },
+    {
+      "id": "road-109",
+      "source": "22",
+      "target": "20",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 109,
+        "roadType": "T3",
+        "label": "R109"
+      }
+    },
+    {
+      "id": "road-110",
+      "source": "13",
+      "target": "21",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 110,
+        "roadType": "T3",
+        "label": "R110"
+      }
+    },
+    {
+      "id": "road-111",
+      "source": "23",
+      "target": "22",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 111,
+        "roadType": "T1",
+        "label": "R111"
+      }
+    },
+    {
+      "id": "road-112",
+      "source": "39",
+      "target": "22",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 112,
+        "roadType": "T1",
+        "label": "R112"
+      }
+    },
+    {
+      "id": "road-113",
+      "source": "24",
+      "target": "23",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 113,
+        "roadType": "T1",
+        "label": "R113"
+      }
+    },
+    {
+      "id": "road-114",
+      "source": "25",
+      "target": "24",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 114,
+        "roadType": "T1",
+        "label": "R114"
+      }
+    },
+    {
+      "id": "road-115",
+      "source": "27",
+      "target": "25",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 115,
+        "roadType": "T1",
+        "label": "R115"
+      }
+    },
+    {
+      "id": "road-116",
+      "source": "11",
+      "target": "26",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 116,
+        "roadType": "T2",
+        "label": "R116"
+      }
+    },
+    {
+      "id": "road-117",
+      "source": "28",
+      "target": "27",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 117,
+        "roadType": "T1",
+        "label": "R117"
+      }
+    },
+    {
+      "id": "road-118",
+      "source": "29",
+      "target": "28",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 118,
+        "roadType": "T1",
+        "label": "R118"
+      }
+    },
+    {
+      "id": "road-119",
+      "source": "40",
+      "target": "28",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 119,
+        "roadType": "T2",
+        "label": "R119"
+      }
+    },
+    {
+      "id": "road-120",
+      "source": "30",
+      "target": "29",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 120,
+        "roadType": "T1",
+        "label": "R120"
+      }
+    },
+    {
+      "id": "road-121",
+      "source": "35",
+      "target": "29",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 121,
+        "roadType": "T1",
+        "label": "R121"
+      }
+    },
+    {
+      "id": "road-122",
+      "source": "31",
+      "target": "30",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 122,
+        "roadType": "T1",
+        "label": "R122"
+      }
+    },
+    {
+      "id": "road-123",
+      "source": "32",
+      "target": "30",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 123,
+        "roadType": "T2",
+        "label": "R123"
+      }
+    },
+    {
+      "id": "road-124",
+      "source": "33",
+      "target": "32",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 124,
+        "roadType": "T1",
+        "label": "R124"
+      }
+    },
+    {
+      "id": "road-125",
+      "source": "35",
+      "target": "32",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 125,
+        "roadType": "T1",
+        "label": "R125"
+      }
+    },
+    {
+      "id": "road-126",
+      "source": "34",
+      "target": "32",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 126,
+        "roadType": "T2",
+        "label": "R126"
+      }
+    },
+    {
+      "id": "road-127",
+      "source": "34",
+      "target": "33",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 127,
+        "roadType": "T1",
+        "label": "R127"
+      }
+    },
+    {
+      "id": "road-128",
+      "source": "5",
+      "target": "34",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 128,
+        "roadType": "T1",
+        "label": "R128"
+      }
+    },
+    {
+      "id": "road-129",
+      "source": "8",
+      "target": "34",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 129,
+        "roadType": "T2",
+        "label": "R129"
+      }
+    },
+    {
+      "id": "road-130",
+      "source": "36",
+      "target": "4",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 130,
+        "roadType": "T1",
+        "label": "R130"
+      }
+    },
+    {
+      "id": "road-131",
+      "source": "37",
+      "target": "36",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 131,
+        "roadType": "T1",
+        "label": "R131"
+      }
+    },
+    {
+      "id": "road-132",
+      "source": "26",
+      "target": "37",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 132,
+        "roadType": "T2",
+        "label": "R132"
+      }
+    },
+    {
+      "id": "road-133",
+      "source": "39",
+      "target": "37",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 133,
+        "roadType": "T1",
+        "label": "R133"
+      }
+    },
+    {
+      "id": "road-134",
+      "source": "38",
+      "target": "26",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 134,
+        "roadType": "T2",
+        "label": "R134"
+      }
+    },
+    {
+      "id": "road-135",
+      "source": "39",
+      "target": "38",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 135,
+        "roadType": "T2",
+        "label": "R135"
+      }
+    },
+    {
+      "id": "road-136",
+      "source": "12",
+      "target": "9",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 136,
+        "roadType": "T1",
+        "label": "R136"
+      }
+    },
+    {
+      "id": "road-137",
+      "source": "38",
+      "target": "20",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 137,
+        "roadType": "T2",
+        "label": "R137"
+      }
+    },
+    {
+      "id": "road-138",
+      "source": "33",
+      "target": "31",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 138,
+        "roadType": "T2",
+        "label": "R138"
+      }
+    },
+    {
+      "id": "road-139",
+      "source": "41",
+      "target": "31",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 139,
+        "roadType": "T1",
+        "label": "R139"
+      }
+    },
+    {
+      "id": "road-140",
+      "source": "40",
+      "target": "30",
+      "type": "transportRoad",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "data": {
+        "roadNumber": 140,
+        "roadType": "T2",
+        "label": "R140"
+      }
+    }
+  ],
+  "trafficProfiles": {
+    "T1": [
+      300.0,
+      275.0,
+      250.0,
+      225.0,
+      200.0,
+      200.0,
+      200.0,
+      200.0,
+      200.0,
+      225.0,
+      250.0,
+      275.0,
+      300.0,
+      325.0,
+      350.0,
+      375.0,
+      400.0,
+      425.0,
+      450.0,
+      475.0,
+      500.0,
+      550.0,
+      600.0,
+      650.0,
+      700.0,
+      725.0,
+      750.0,
+      775.0,
+      800.0,
+      850.0,
+      900.0,
+      950.0,
+      1000.0,
+      1000.0,
+      1000.0,
+      1000.0,
+      1000.0,
+      950.0,
+      900.0,
+      850.0,
+      800.0,
+      800.0,
+      800.0,
+      800.0,
+      800.0,
+      775.0,
+      750.0,
+      725.0,
+      700.0,
+      675.0,
+      650.0,
+      625.0,
+      600.0,
+      600.0,
+      600.0,
+      600.0,
+      600.0,
+      625.0,
+      650.0,
+      675.0,
+      700.0,
+      725.0,
+      750.0,
+      775.0,
+      800.0,
+      825.0,
+      850.0,
+      875.0,
+      900.0,
+      925.0,
+      950.0,
+      975.0,
+      1000.0,
+      1000.0,
+      1000.0,
+      1000.0,
+      1000.0,
+      1000.0,
+      1000.0,
+      1000.0,
+      1000.0,
+      950.0,
+      900.0,
+      850.0,
+      800.0,
+      725.0,
+      650.0,
+      575.0,
+      500.0,
+      475.0,
+      450.0,
+      425.0,
+      400.0,
+      375.0,
+      350.0,
+      325.0
+    ],
+    "T2": [
+      200.0,
+      200.0,
+      200.0,
+      200.0,
+      200.0,
+      200.0,
+      200.0,
+      200.0,
+      200.0,
+      200.0,
+      200.0,
+      200.0,
+      200.0,
+      302.0,
+      403.0,
+      505.0,
+      606.0,
+      655.0,
+      703.0,
+      752.0,
+      800.0,
+      1000.0,
+      1200.0,
+      1400.0,
+      1600.0,
+      1700.0,
+      1800.0,
+      1900.0,
+      2000.0,
+      1950.0,
+      1900.0,
+      1850.0,
+      1800.0,
+      1750.0,
+      1700.0,
+      1650.0,
+      1600.0,
+      1450.0,
+      1300.0,
+      1150.0,
+      1000.0,
+      975.0,
+      950.0,
+      925.0,
+      900.0,
+      825.0,
+      750.0,
+      675.0,
+      600.0,
+      600.0,
+      600.0,
+      600.0,
+      600.0,
+      650.0,
+      700.0,
+      750.0,
+      800.0,
+      900.0,
+      1000.0,
+      1100.0,
+      1200.0,
+      1300.0,
+      1400.0,
+      1500.0,
+      1600.0,
+      1650.0,
+      1700.0,
+      1750.0,
+      1800.0,
+      1800.0,
+      1800.0,
+      1800.0,
+      1800.0,
+      1850.0,
+      1900.0,
+      1950.0,
+      2000.0,
+      1950.0,
+      1900.0,
+      1850.0,
+      1800.0,
+      1550.0,
+      1300.0,
+      1050.0,
+      800.0,
+      750.0,
+      700.0,
+      650.0,
+      600.0,
+      550.0,
+      500.0,
+      450.0,
+      400.0,
+      350.0,
+      300.0,
+      250.0
+    ],
+    "T3": [
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      450.0,
+      600.0,
+      750.0,
+      900.0,
+      975.0,
+      1050.0,
+      1125.0,
+      1200.0,
+      1500.0,
+      1800.0,
+      2100.0,
+      2400.0,
+      2550.0,
+      2700.0,
+      2850.0,
+      3000.0,
+      2925.0,
+      2850.0,
+      2775.0,
+      2700.0,
+      2475.0,
+      2250.0,
+      2025.0,
+      1800.0,
+      1725.0,
+      1650.0,
+      1575.0,
+      1500.0,
+      1425.0,
+      1350.0,
+      1275.0,
+      1200.0,
+      1050.0,
+      900.0,
+      750.0,
+      600.0,
+      600.0,
+      600.0,
+      600.0,
+      600.0,
+      675.0,
+      750.0,
+      825.0,
+      900.0,
+      1050.0,
+      1200.0,
+      1350.0,
+      1500.0,
+      1725.0,
+      1950.0,
+      2175.0,
+      2400.0,
+      2550.0,
+      2700.0,
+      2850.0,
+      3000.0,
+      2925.0,
+      2850.0,
+      2775.0,
+      2700.0,
+      2550.0,
+      2400.0,
+      2550.0,
+      2100.0,
+      1950.0,
+      1800.0,
+      1650.0,
+      1500.0,
+      1350.0,
+      1200.0,
+      1050.0,
+      900.0,
+      825.0,
+      750.0,
+      675.0,
+      600.0,
+      525.0,
+      450.0,
+      375.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0
+    ]
+  }
+}

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TopologyCanvas } from './components/canvas/TopologyCanvas';
+import { TransportCanvas } from './components/transport/TransportCanvas';
 import { ComponentType, type PdnEdge, type PdnNode } from './types/graph.types';
+
+type AppView = 'pdn' | 'transport';
 
 // IEEE 33-bus radial distribution test feeder (Baran & Wu, 1989) — the
 // standard reference topology. Grid position for each bus approximates the
@@ -142,18 +145,50 @@ const demoNodes: PdnNode[] = buildDemoNodes();
 const demoEdges: PdnEdge[] = buildDemoEdges();
 
 const App: React.FC = () => {
+  const [view, setView] = useState<AppView>('pdn');
+
   return (
     <div className="h-screen w-screen flex flex-col bg-slate-50">
-      <header className="px-4 py-2 border-b border-slate-200 bg-white shadow-sm">
+      <header className="px-4 py-2 border-b border-slate-200 bg-white shadow-sm flex items-center justify-between gap-4">
         <h1 className="text-sm font-semibold text-slate-800">
           Project-PDN{' '}
           <span className="text-slate-400 font-normal">
-            — IEEE 33-bus radial test feeder (standalone demo)
+            {view === 'pdn'
+              ? '— IEEE 33-bus radial test feeder (standalone demo)'
+              : '— Transportation network (roads, EV nodes, traffic)'}
           </span>
         </h1>
+        <nav className="flex items-center gap-1 rounded-md border border-slate-200 bg-slate-50 p-0.5">
+          <button
+            type="button"
+            onClick={() => setView('pdn')}
+            className={`rounded px-3 py-1 text-xs font-medium transition-colors ${
+              view === 'pdn'
+                ? 'bg-indigo-600 text-white shadow-sm'
+                : 'text-slate-600 hover:bg-white'
+            }`}
+          >
+            PDN
+          </button>
+          <button
+            type="button"
+            onClick={() => setView('transport')}
+            className={`rounded px-3 py-1 text-xs font-medium transition-colors ${
+              view === 'transport'
+                ? 'bg-indigo-600 text-white shadow-sm'
+                : 'text-slate-600 hover:bg-white'
+            }`}
+          >
+            Transportation
+          </button>
+        </nav>
       </header>
-      <main className="flex-1">
-        <TopologyCanvas initialNodes={demoNodes} initialEdges={demoEdges} />
+      <main className="flex-1 min-h-0">
+        {view === 'pdn' ? (
+          <TopologyCanvas initialNodes={demoNodes} initialEdges={demoEdges} />
+        ) : (
+          <TransportCanvas />
+        )}
       </main>
     </div>
   );
