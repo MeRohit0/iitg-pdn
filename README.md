@@ -6,7 +6,7 @@
 
 **Research Scholar:** Subhadarshini Panda  
 **Supervisor:** Dr. Sanjib Ganguly  
-**Developer:** @merohit0
+**Research Developer:** @merohit0
 
 ---
 
@@ -53,28 +53,28 @@ The application has **two independent simulation canvases** (switchable from the
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────┐
-│                            App (Tab Switcher)                               │
-│                         ┌─────────┐  ┌────────────────┐                     │
-│                         │   PDN   │  │ Transportation  │                     │
-│                         └────┬────┘  └───────┬────────┘                     │
-├──────────────────────────────┼───────────────┼──────────────────────────────┤
-│                              │               │                              │
-│  ┌───────────────────────────▼──┐  ┌────────▼───────────────────────────┐  │
-│  │   Power Distribution Network │  │   Transportation Network          │  │
-│  │                              │  │                                    │  │
-│  │  • IEEE 33-bus test feeder   │  │  • 41-node / 140-road demo        │  │
-│  │  • BFS load flow solver      │  │  • Road types: T1 / T2 / T3      │  │
-│  │  • 96-step (24h) time-series │  │  • EV charging station nodes      │  │
-│  │  • Voltage / loss analytics  │  │  • 96-step traffic profiles       │  │
-│  │  • 2D + 3D visualisation     │  │  • 3D traffic surface + 2D plots  │  │
-│  └──────────────────────────────┘  └────────────────────────────────────┘  │
-│                              │               │                              │
-│                              └───────┬───────┘                              │
-│                                      │ (planned)                            │
-│                         ┌────────────▼────────────┐                         │
-│                         │  Co-Simulation / MIP     │                         │
-│                         │  (EV demand → PDN load)  │                         │
-│                         └─────────────────────────┘                         │
+│                            App (Tab Switcher)                                │
+│                         ┌─────────┐  ┌────────────────┐                      │
+│                         │   PDN   │  │ Transportation │                      │
+│                         └────┬────┘  └───────┬────────┘                      │
+├──────────────────────────────┼───────────────┼───────────────────────────────┤
+│                              │               │                               │
+│  ┌───────────────────────────▼──┐  ┌────────▼───────────────────────────┐    │
+│  │   Power Distribution Network │  │   Transportation Network           │    │
+│  │                              │  │                                    │    │
+│  │  • IEEE 33-bus test feeder   │  │  • 41-node / 140-road demo         │    │
+│  │  • BFS load flow solver      │  │  • Road types: T1 / T2 / T3        │    │
+│  │  • 96-step (24h) time-series │  │  • EV charging station nodes       │    │
+│  │  • Voltage / loss analytics  │  │  • 96-step traffic profiles        │    │
+│  │  • 2D + 3D visualisation     │  │  • 3D traffic surface + 2D plots   │    │
+│  └──────────────────────────────┘  └────────────────────────────────────┘    │
+│                              │               │                               │
+│                              └───────┬───────┘                               │
+│                                      │ (planned)                             │
+│                         ┌────────────▼────────────┐                          │
+│                         │  Co-Simulation / MIP    │                          │
+│                         │  (EV demand → PDN load) │                          │
+│                         └─────────────────────────┘                          │
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
