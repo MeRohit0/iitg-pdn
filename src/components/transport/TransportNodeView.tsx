@@ -4,7 +4,7 @@ import { FourSideHandles } from '../nodes/FourSideHandles';
 import type { TransportNodeData } from '../../types/transport.types';
 
 /** Compact junction node; EV charging stations get an emerald ring + badge. */
-export const TransportNodeView: React.FC<NodeProps> = ({ data, selected }) => {
+export const TransportNodeView: React.FC<NodeProps> = React.memo(({ data, selected }) => {
   const d = data as TransportNodeData;
   const isEv = Boolean(d.isEvChargingStation);
 
@@ -44,7 +44,7 @@ export const TransportNodeView: React.FC<NodeProps> = ({ data, selected }) => {
       )}
     </div>
   );
-};
+});
 
 export const transportNodeTypes = {
   transportNode: TransportNodeView,

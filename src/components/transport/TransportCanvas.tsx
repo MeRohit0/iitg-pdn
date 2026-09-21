@@ -63,7 +63,10 @@ const TransportCanvasInner: React.FC = () => {
   const [selectedRoadNumber, setSelectedRoadNumber] = useState<number | null>(null);
 
   useEffect(() => {
-    savePersistedTransport(nodes, roads, trafficProfiles);
+    const timer = setTimeout(() => {
+      savePersistedTransport(nodes, roads, trafficProfiles);
+    }, 400);
+    return () => clearTimeout(timer);
   }, [nodes, roads, trafficProfiles]);
 
   const onNodesChange = useCallback(

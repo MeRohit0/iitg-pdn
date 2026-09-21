@@ -73,7 +73,7 @@ export const TrafficAnalyticsModal: React.FC<Props> = ({
   }, [roadNumbers, sortedRoads, trafficProfiles]);
 
   const chart3DData = useMemo(() => {
-    if (sortedRoads.length === 0) return [];
+    if (tab !== '3d' || sortedRoads.length === 0) return [];
 
     const traces: any[] = [
       {
@@ -135,7 +135,7 @@ export const TrafficAnalyticsModal: React.FC<Props> = ({
     }
 
     return traces;
-  }, [surface, focusRoadNumber, sortedRoads, trafficProfiles, currentTimeStep, clockString, roadNumbers]);
+  }, [tab, surface, focusRoadNumber, sortedRoads, trafficProfiles, currentTimeStep, clockString, roadNumbers]);
 
   const chart3DLayout = useMemo(
     () => ({
@@ -185,6 +185,7 @@ export const TrafficAnalyticsModal: React.FC<Props> = ({
   );
 
   const chart2DData = useMemo(() => {
+    if (tab !== '2d') return [];
     const times = Array.from({ length: TIME_SLOTS }, (_, i) => timeSlotToClock(i + 1));
     const traces: any[] = ROAD_TYPES.map((t) => ({
       type: 'scatter',
@@ -213,7 +214,7 @@ export const TrafficAnalyticsModal: React.FC<Props> = ({
     }
 
     return traces;
-  }, [trafficProfiles, focusRoadNumber, sortedRoads, currentTimeStep, clockString]);
+  }, [tab, trafficProfiles, focusRoadNumber, sortedRoads, currentTimeStep, clockString]);
 
   const chart2DLayout = useMemo(
     () => ({
@@ -244,12 +245,13 @@ export const TrafficAnalyticsModal: React.FC<Props> = ({
   );
 
   const snapshotAtTime = useMemo(() => {
+    if (tab !== '2d') return [];
     return sortedRoads.map((road) => ({
       roadNumber: road.data?.roadNumber ?? 0,
       roadType: road.data?.roadType ?? null,
       vehicles: trafficAt(trafficProfiles, road.data?.roadType, currentTimeStep),
     }));
-  }, [sortedRoads, trafficProfiles, currentTimeStep]);
+  }, [tab, sortedRoads, trafficProfiles, currentTimeStep]);
 
   const togglePlay = useCallback(() => setIsPlaying((p) => !p), []);
 

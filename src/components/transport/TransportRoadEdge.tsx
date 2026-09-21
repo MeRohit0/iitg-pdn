@@ -14,7 +14,7 @@ import {
 type Props = EdgeProps & { data?: TransportRoadData };
 
 /** Road edge colored by T1/T2/T3 (green/orange/red); gray when unset. */
-export const TransportRoadEdge: React.FC<Props> = ({
+export const TransportRoadEdge: React.FC<Props> = React.memo(({
   id,
   sourceX,
   sourceY,
@@ -134,7 +134,7 @@ export const TransportRoadEdge: React.FC<Props> = ({
       </EdgeLabelRenderer>
     </>
   );
-};
+});
 
 export const transportEdgeTypes = {
   transportRoad: TransportRoadEdge,
