@@ -19,7 +19,7 @@ interface FourSideHandlesProps {
  * works identically for starting or completing a connection. Each needs a
  * unique `id` since a node has four handles of the same declared type.
  */
-export const FourSideHandles: React.FC<FourSideHandlesProps> = ({ className }) => {
+export const FourSideHandles: React.FC<FourSideHandlesProps> = React.memo(({ className }) => {
   const base = className ?? '!bg-slate-500 !h-2 !w-2';
   return (
     <>
@@ -29,4 +29,4 @@ export const FourSideHandles: React.FC<FourSideHandlesProps> = ({ className }) =
       <Handle id="left" type="source" position={Position.Left} className={base} />
     </>
   );
-};
+});

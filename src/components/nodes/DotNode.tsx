@@ -19,7 +19,7 @@ interface DotNodeProps {
  * (see FourSideHandles) a few pixels clear of the circle itself — enough
  * room to grab a connection point without it overlapping the number.
  */
-export const DotNode: React.FC<DotNodeProps> = ({ data, selected }) => {
+export const DotNode: React.FC<DotNodeProps> = React.memo(({ data, selected }) => {
   const isEnergized = data.result?.isEnergized;
   const params = data.params as {
     activePowerMw?: number;
@@ -100,4 +100,4 @@ export const DotNode: React.FC<DotNodeProps> = ({ data, selected }) => {
       </div>
     </div>
   );
-};
+});

@@ -13,7 +13,7 @@ interface SubstationBarNodeProps {
  * FourSideHandles — so the feeder can run out to the right (typical), or
  * a tie line can come in from any other direction.
  */
-export const SubstationBarNode: React.FC<SubstationBarNodeProps> = ({ data, selected }) => {
+export const SubstationBarNode: React.FC<SubstationBarNodeProps> = React.memo(({ data, selected }) => {
   const tooltipParts = [data.label, 'Substation'];
   if (data.result?.voltagePu != null) {
     tooltipParts.push(`${data.result.voltagePu.toFixed(3)} p.u.`);
@@ -46,4 +46,4 @@ export const SubstationBarNode: React.FC<SubstationBarNodeProps> = ({ data, sele
       </div>
     </div>
   );
-};
+});
