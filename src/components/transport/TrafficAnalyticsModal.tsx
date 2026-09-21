@@ -81,10 +81,19 @@ export const TrafficAnalyticsModal: React.FC<Props> = ({
         x: surface.x,
         y: surface.y.map(timeSlotToClock),
         z: surface.z,
+        customdata: surface.y.map((slot) => surface.x.map(() => slot)),
         colorscale: 'Viridis',
-        colorbar: { title: 'Vehicles', len: 0.75, thickness: 16 },
+        colorbar: {
+          title: {
+            text: 'Traffic',
+            font: { size: 11, color: '#334155' },
+            side: 'right',
+          },
+          len: 0.75,
+          thickness: 16,
+        },
         hovertemplate:
-          'Road %{x}<br>Time: %{y}<br>Vehicles: <b>%{z:.0f}</b><extra></extra>',
+          'Road number: <b>%{x}</b><br>Time: <b>%{y}</b> (Slot %{customdata}/96)<br>Traffic: <b>%{z:.0f} vehicles</b><extra></extra>',
         opacity: focusRoadNumber != null ? 0.85 : 1,
       },
     ];
@@ -101,7 +110,7 @@ export const TrafficAnalyticsModal: React.FC<Props> = ({
       ),
       line: { color: '#ef4444', width: 5 },
       marker: { size: 3, color: '#ef4444' },
-      hovertemplate: `Road %{x}<br>Time: ${clockString}<br>Vehicles: <b>%{z:.0f}</b><extra>Current Time</extra>`,
+      hovertemplate: `Road number: <b>%{x}</b><br>Time: <b>${clockString}</b> (Slot ${currentTimeStep}/96)<br>Traffic: <b>%{z:.0f} vehicles</b><extra>Current Time</extra>`,
     });
 
     if (focusRoadNumber != null) {
@@ -118,8 +127,9 @@ export const TrafficAnalyticsModal: React.FC<Props> = ({
           x: Array.from({ length: TIME_SLOTS }, () => focusRoadNumber),
           y: Array.from({ length: TIME_SLOTS }, (_, i) => timeSlotToClock(i + 1)),
           z: zs,
+          customdata: Array.from({ length: TIME_SLOTS }, (_, i) => i + 1),
           line: { color: '#4f46e5', width: 6 },
-          hovertemplate: `Road ${focusRoadNumber}<br>%{y}: %{z:.0f}<extra></extra>`,
+          hovertemplate: `Road number: <b>${focusRoadNumber}</b><br>Time: <b>%{y}</b> (Slot %{customdata}/96)<br>Traffic: <b>%{z:.0f} vehicles</b><extra>Road ${focusRoadNumber}</extra>`,
         });
       }
     }
@@ -130,22 +140,48 @@ export const TrafficAnalyticsModal: React.FC<Props> = ({
   const chart3DLayout = useMemo(
     () => ({
       title: {
-        text: '<b>3D Traffic Surface — Road × Time (96 × 15 min)</b>',
+        text: `<b>3D Traffic Surface — ${sortedRoads.length} Roads × 96 Time Intervals (24h)</b>`,
         font: { size: 14, color: '#1e293b' },
       },
       autosize: true,
+      uirevision: 'constant',
       scene: {
-        aspectmode: 'cube',
-        xaxis: { title: 'X: Road number', gridcolor: '#cbd5e1' },
-        yaxis: { title: 'Y: Time of day', gridcolor: '#cbd5e1' },
-        zaxis: { title: 'Z: Vehicles', gridcolor: '#cbd5e1' },
-        camera: { eye: { x: 1.6, y: -1.7, z: 1.2 } },
+        aspectmode: 'manual',
+        aspectratio: { x: 2.2, y: 1.8, z: 1.0 },
+        uirevision: 'constant',
+        xaxis: {
+          title: {
+            text: 'Road number',
+            font: { size: 12, color: '#1e293b' },
+          },
+          gridcolor: '#cbd5e1',
+          tickfont: { size: 10, color: '#475569' },
+          nticks: Math.min(sortedRoads.length, 14),
+        },
+        yaxis: {
+          title: {
+            text: 'Time (96 intervals / 24h)',
+            font: { size: 12, color: '#1e293b' },
+          },
+          gridcolor: '#cbd5e1',
+          tickfont: { size: 10, color: '#475569' },
+          nticks: 12,
+        },
+        zaxis: {
+          title: {
+            text: 'Traffic',
+            font: { size: 12, color: '#1e293b' },
+          },
+          gridcolor: '#cbd5e1',
+          tickfont: { size: 10, color: '#475569' },
+        },
+        camera: { eye: { x: 1.9, y: -2.0, z: 1.3 } },
       },
       margin: { l: 10, r: 10, t: 40, b: 20 },
       paper_bgcolor: 'transparent',
       showlegend: true,
     }),
-    []
+    [sortedRoads.length]
   );
 
   const chart2DData = useMemo(() => {
@@ -274,7 +310,9 @@ export const TrafficAnalyticsModal: React.FC<Props> = ({
               <option value={2}>2×</option>
               <option value={4}>4×</option>
             </select>
-            <span className="tabular-nums font-medium text-indigo-700 w-12">{clockString}</span>
+            <span className="tabular-nums font-medium text-indigo-700 whitespace-nowrap">
+              {clockString} <span className="text-[10px] text-slate-400 font-normal">(Slot {currentTimeStep}/{TIME_SLOTS})</span>
+            </span>
             <input
               type="range"
               min={1}
