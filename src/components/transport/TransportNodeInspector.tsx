@@ -5,9 +5,15 @@ interface Props {
   node: TransportNode;
   onClose: () => void;
   onChange: (patch: Partial<TransportNode['data']>) => void;
+  onViewEvAnalytics?: () => void;
 }
 
-export const TransportNodeInspector: React.FC<Props> = ({ node, onClose, onChange }) => {
+export const TransportNodeInspector: React.FC<Props> = ({
+  node,
+  onClose,
+  onChange,
+  onViewEvAnalytics,
+}) => {
   const d = node.data;
 
   return (
@@ -71,6 +77,27 @@ export const TransportNodeInspector: React.FC<Props> = ({ node, onClose, onChang
             className="w-full rounded-md border border-slate-300 px-2 py-1.5 text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </label>
+
+        {Boolean(d.isEvChargingStation) && (
+          <div className="rounded-md bg-emerald-50 border border-emerald-200 p-2 space-y-1.5">
+            <div className="text-[11px] font-semibold text-emerald-800 flex items-center gap-1">
+              <span className="inline-block h-2 w-2 rounded-full bg-emerald-600" />
+              Active EV Charging Station
+            </div>
+            <p className="text-[10px] text-emerald-700 leading-relaxed">
+              Included in the 3D Spatial-Temporal EV Charging distribution and 24h diurnal profiles.
+            </p>
+            {onViewEvAnalytics && (
+              <button
+                type="button"
+                onClick={onViewEvAnalytics}
+                className="w-full rounded bg-emerald-600 px-2 py-1 text-[11px] font-medium text-white hover:bg-emerald-700 transition-colors shadow-sm"
+              >
+                ⚡ View EV Charging Graph
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </aside>
   );

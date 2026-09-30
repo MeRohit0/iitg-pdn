@@ -85,3 +85,23 @@ export function timeSlotToClock(slot1Based: number): string {
   const m = minutes % 60;
   return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
 }
+
+export const HOURS_IN_DAY = 24;
+
+export interface EvChargingStationInfo {
+  id: string;
+  label: string;
+  stationName: string;
+  voltageKv: number;
+  powerDrawKw: number;
+  hourlyChargingEvs: number[]; // 24 values (hours 1..24)
+  peakChargingEvs: number;
+  totalDailySessions: number;
+}
+
+export interface EvChargingSpatialTemporalMatrix {
+  stationLabels: string[];
+  hours: number[]; // [1, 2, ..., 24]
+  zMatrix: number[][]; // [hourIndex][stationIndex] -> No of charging EV
+  stations: EvChargingStationInfo[];
+}

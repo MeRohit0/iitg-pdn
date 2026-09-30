@@ -20,7 +20,7 @@ import { transportEdgeTypes } from './TransportRoadEdge';
 import { TransportNodeInspector } from './TransportNodeInspector';
 import { TransportRoadInspector } from './TransportRoadInspector';
 import { TransportIOPanel } from './TransportIOPanel';
-import { TrafficAnalyticsModal } from './TrafficAnalyticsModal';
+import { TrafficAnalyticsModal, type AnalyticsTab } from './TrafficAnalyticsModal';
 import { getDemoTransportNetwork, normalizeRoadHandles } from '../../data/demoTransportNetwork';
 import {
   clearPersistedTransport,
@@ -253,8 +253,16 @@ const TransportCanvasInner: React.FC = () => {
     setTimeout(() => fitView({ padding: 0.15, duration: 200 }), 50);
   }, [fitView]);
 
-  const openAnalytics = useCallback(() => {
+  const [analyticsTab, setAnalyticsTab] = useState<AnalyticsTab>('ev-3d');
+
+  const openEvAnalytics = useCallback(() => {
+    setAnalyticsTab('ev-3d');
+    setIsAnalyticsOpen(true);
+  }, []);
+
+  const openTrafficAnalytics = useCallback(() => {
     setFocusRoadNumber(selectedRoadNumber);
+    setAnalyticsTab('traffic-3d');
     setIsAnalyticsOpen(true);
   }, [selectedRoadNumber]);
 
@@ -335,6 +343,7 @@ const TransportCanvasInner: React.FC = () => {
           node={inspectorNode}
           onClose={() => setInspectorTarget(null)}
           onChange={handleChangeNode}
+          onViewEvAnalytics={openEvAnalytics}
         />
       )}
 
@@ -360,9 +369,11 @@ const TransportCanvasInner: React.FC = () => {
 
       {isAnalyticsOpen && (
         <TrafficAnalyticsModal
+          nodes={nodes}
           roads={roads}
           trafficProfiles={trafficProfiles}
           focusRoadNumber={focusRoadNumber}
+          initialTab={analyticsTab}
           onClose={() => setIsAnalyticsOpen(false)}
         />
       )}
@@ -375,7 +386,18 @@ const TransportCanvasInner: React.FC = () => {
       <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
         <button
           type="button"
-          onClick={openAnalytics}
+          onClick={openEvAnalytics}
+          title="Open 3D Spatial-Temporal EV Charging Distribution"
+          className="rounded-md border border-emerald-300 bg-emerald-50 px-2.5 py-2 text-xs font-semibold text-emerald-800 shadow hover:bg-emerald-100 transition-colors flex items-center gap-1.5"
+        >
+          <span className="inline-flex h-3.5 w-3.5 items-center justify-center rounded-full bg-emerald-700 text-[7px] font-black text-white">
+            EV
+          </span>
+          EV Analytics
+        </button>
+        <button
+          type="button"
+          onClick={openTrafficAnalytics}
           title="Open 3D traffic surface and type profiles"
           className="rounded-md border border-indigo-200 bg-indigo-50/80 px-2.5 py-2 text-xs font-medium text-indigo-700 shadow hover:bg-indigo-100 transition-colors"
         >

@@ -102,6 +102,7 @@ src/
 │
 ├── data/                           ── Built-in Datasets ──
 │   ├── defaultTimeSeriesData.ts       96-interval load multiplier curves (R / I / C)
+│   ├── defaultEvChargingData.ts       24-hour diurnal EV charging curves & spatio-temporal matrix
 │   ├── demoTransportNetwork.json      41-node / 140-road demo network + traffic profiles
 │   └── demoTransportNetwork.ts        Loader & normaliser for the demo JSON
 │
@@ -123,13 +124,18 @@ src/
 │   │       └─ Data manager: JSON multiplier editor, CSV export
 │   │
 │   ├── transport/                  ── Transportation Canvas & Analytics ──
-│   │   ├── TransportCanvas.tsx        Main React Flow canvas for road network
-│   │   ├── TransportNodeView.tsx      Node renderer (EV station = blue, junction = grey)
+│   │   ├── TransportCanvas.tsx        Main React Flow canvas for road network & EV stations
+│   │   ├── TransportNodeView.tsx      Node renderer (EV station = blue/green badge, junction = grey)
 │   │   ├── TransportRoadEdge.tsx      Road renderer (color-coded by T1/T2/T3 type)
-│   │   ├── TransportNodeInspector.tsx Node editor (EV flag, voltage kV, power kW)
+│   │   ├── TransportNodeInspector.tsx Node editor (EV flag, voltage kV, power kW, analytics shortcut)
 │   │   ├── TransportRoadInspector.tsx Road editor (type, number, label)
 │   │   ├── TransportIOPanel.tsx       JSON import / export modal
-│   │   └── TrafficAnalyticsModal.tsx  3D traffic surface + 2D type-profile curves
+│   │   └── TrafficAnalyticsModal.tsx  Multi-tab analytics:
+│   │       ├─ 3D EV Surface: Station × Time (hours) × No of charging EV
+│   │       ├─ EV Ridgeline: 2D Joyplot & 3D Ribbon plots across 24h
+│   │       ├─ 2D EV Profiles: 24h per-station curves & occupancy stats
+│   │       ├─ 3D Road Traffic: Road number × Time (96 slots) × Vehicles
+│   │       └─ 2D Type Profiles: T1/T2/T3 daily traffic curves
 │   │
 │   ├── nodes/                      ── PDN Node Renderers ──
 │   │   ├── SubstationBarNode.tsx      Red vertical bar (SLD substation symbol)
@@ -174,15 +180,18 @@ Baran & Wu (1989) — 33 buses, 32 radial branches, 12.66 kV base voltage. Main 
 |---|---|
 | **Road Network Builder** | Pan, zoom, add / move / delete transport nodes and road edges |
 | **3 Road Types** | T1 (green) · T2 (amber) · T3 (red) — each with a 96-slot daily vehicle profile |
-| **EV Charging Stations** | Any node can be marked as a charging station with voltage (kV) and power draw (kW) |
-| **3D Traffic Surface** | Road × Time × Vehicle count (WebGL) |
-| **2D Profiles** | Per-type 24h traffic curves with animated playback scrubber |
+| **EV Charging Stations** | Any node can be designated as an EV charging station with voltage (kV) and power draw (kW) |
+| **Spatial-Temporal EV Charging (3D)** | **3D WebGL Surface**: $X$: Charging Station, $Y$: Time (in hours), $Z$: No of charging EV, with interactive orbit, 24h time-slice cursor, and $1\times/2\times/4\times$ playback |
+| **EV Ridgeline Plots (Joyplot & 3D Ribbons)** | **2D Joyplot**: Vertically stacked, partially overlapping filled ridges per station with interactive overlap slider (20%–130%) · **3D Ribbons**: Extruded 3D ribbon waterfall with vertical curtain drops along the station axis |
+| **EV Station Profiles (2D)** | 24-hour diurnal curves for each station, station occupancy table, peak charging EVs, and daily sessions |
+| **3D Road Traffic Surface** | Road number × Time (96 slots / 24h) × Vehicle count (WebGL surface) |
+| **2D Traffic Profiles** | Per-type 24h traffic curves (T1/T2/T3) with animated playback scrubber |
 | **Data I/O** | JSON import/export with strict schema validation |
 | **Auto-Persistence** | Canvas + traffic profiles auto-saved to localStorage |
 
 ### Default Topology — 41-Node Demo Network
 
-41 transport nodes (intersections and EV stations), 140 roads with T1/T2/T3 type assignments, and pre-loaded 96-slot traffic profiles. EV station nodes represent the **coupling points** where transport-side charging demand will map to PDN bus loads in the co-simulation.
+41 transport nodes (intersections and EV stations), 140 roads with T1/T2/T3 type assignments, and pre-loaded 96-slot traffic profiles. The 6 reference EV charging stations (at nodes 2, 9, 19, 26, 32, and 40) represent the **coupling points** where transport-side EV charging demand maps to PDN bus loads in the co-simulation.
 
 ---
 
@@ -231,14 +240,15 @@ $$P_i(t) = P_{\text{base},i} \times m_{\text{class}(i)}(t)$$
 - [x] **M6** — 3D WebGL voltage surface
 - [x] **M7** — UI/UX polish: context-aware nav, playback speed, decluttered toolbar
 - [x] **M8** — Transportation canvas: road network, T1/T2/T3 types, EV stations, traffic analytics, JSON I/O
+- [x] **M9** — Spatial-temporal distribution of EV charging graph ($X$: Charging Station, $Y$: Time in hours, $Z$: No of charging EV) with 3D surface + 2D station profiles + 24h playback scrubber
 
 ### Upcoming
 
-- [ ] **M9** — EV charging demand coupling: transport-layer EV power draw → PDN bus loads → re-run BFS
-- [ ] **M10** — MIP co-optimisation solver (per the reference paper): joint EV routing + charging schedule + PDN constraints + SOC dynamics
-- [ ] **M11** — DER / Solar PV injection profiles on PDN buses
-- [ ] **M12** — Network reconfiguration (tie-switch optimisation for loss minimisation)
-- [ ] **M13** — Results dashboard: before/after comparison under MIP-optimal vs. uncoordinated baseline
+- [ ] **M10** — EV charging demand coupling: transport-layer EV power draw → PDN bus loads → re-run BFS
+- [ ] **M11** — MIP co-optimisation solver (per the reference paper): joint EV routing + charging schedule + PDN constraints + SOC dynamics
+- [ ] **M12** — DER / Solar PV injection profiles on PDN buses
+- [ ] **M13** — Network reconfiguration (tie-switch optimisation for loss minimisation)
+- [ ] **M14** — Results dashboard: before/after comparison under MIP-optimal vs. uncoordinated baseline
 
 ---
 
