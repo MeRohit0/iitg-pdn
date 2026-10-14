@@ -12,29 +12,29 @@ type PdnNodeProps = NodeProps & { data: PdnNodeData };
 // and Load keep the full labeled card since those tend to be fewer in
 // number and benefit from showing more detail inline.
 
-export const SubstationNode: React.FC<PdnNodeProps> = ({ data, selected }) => (
+export const SubstationNode: React.FC<PdnNodeProps> = React.memo(({ data, selected }) => (
   <SubstationBarNode data={data} selected={selected} />
-);
+));
 
-export const TransformerNode: React.FC<PdnNodeProps> = ({ data, selected }) => (
+export const TransformerNode: React.FC<PdnNodeProps> = React.memo(({ data, selected }) => (
   <BaseNode data={data} selected={selected} icon="⏚" accentColorClass="border-amber-500" />
-);
+));
 
-export const GeneratorNode: React.FC<PdnNodeProps> = ({ data, selected }) => (
+export const GeneratorNode: React.FC<PdnNodeProps> = React.memo(({ data, selected }) => (
   <BaseNode data={data} selected={selected} icon="⚡" accentColorClass="border-emerald-600" />
-);
+));
 
-export const LoadNode: React.FC<PdnNodeProps> = ({ data, selected }) => (
+export const LoadNode: React.FC<PdnNodeProps> = React.memo(({ data, selected }) => (
   <BaseNode data={data} selected={selected} icon="🏠" accentColorClass="border-rose-500" />
-);
+));
 
-export const FeederNode: React.FC<PdnNodeProps> = ({ data, selected }) => (
+export const FeederNode: React.FC<PdnNodeProps> = React.memo(({ data, selected }) => (
   <BaseNode data={data} selected={selected} icon="◆" accentColorClass="border-slate-400" />
-);
+));
 
-export const GenericNode: React.FC<PdnNodeProps> = ({ data, selected }) => (
+export const GenericNode: React.FC<PdnNodeProps> = React.memo(({ data, selected }) => (
   <DotNode data={data} selected={selected} />
-);
+));
 
 /** Registry passed to <ReactFlow nodeTypes={...} />. */
 export const nodeTypes: Record<ComponentType, React.FC<PdnNodeProps>> = {

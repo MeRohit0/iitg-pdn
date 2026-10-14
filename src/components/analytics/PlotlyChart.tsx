@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import Plotly from 'plotly.js-dist-min';
 
 export interface PlotlyChartProps {
@@ -11,8 +11,9 @@ export interface PlotlyChartProps {
 
 /**
  * Clean, reactive wrapper for Plotly.js charts (both 2D line and WebGL 3D surfaces).
+ * Wrapped in React.memo with rAF-throttled resizing and memoized configs.
  */
-export const PlotlyChart: React.FC<PlotlyChartProps> = ({
+export const PlotlyChart: React.FC<PlotlyChartProps> = React.memo(({
   data,
   layout,
   config,
@@ -20,31 +21,38 @@ export const PlotlyChart: React.FC<PlotlyChartProps> = ({
   style,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const resizeRafRef = useRef<number | null>(null);
 
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const defaultConfig = {
+  const mergedConfig = useMemo(
+    () => ({
       responsive: true,
       displayModeBar: true,
       displaylogo: false,
       modeBarButtonsToRemove: ['lasso2d', 'select2d'],
       ...config,
-    };
+    }),
+    [config]
+  );
 
-    Plotly.react(containerRef.current, data, layout, defaultConfig);
-  }, [data, layout, config]);
+  useEffect(() => {
+    if (!containerRef.current) return;
+    Plotly.react(containerRef.current, data, layout, mergedConfig);
+  }, [data, layout, mergedConfig]);
 
   useEffect(() => {
     const handleResize = () => {
-      if (containerRef.current) {
-        Plotly.Plots.resize(containerRef.current);
-      }
+      if (resizeRafRef.current != null) cancelAnimationFrame(resizeRafRef.current);
+      resizeRafRef.current = requestAnimationFrame(() => {
+        if (containerRef.current) {
+          Plotly.Plots.resize(containerRef.current);
+        }
+      });
     };
 
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
+      if (resizeRafRef.current != null) cancelAnimationFrame(resizeRafRef.current);
       if (containerRef.current) {
         Plotly.purge(containerRef.current);
       }
@@ -58,4 +66,4 @@ export const PlotlyChart: React.FC<PlotlyChartProps> = ({
       style={{ width: '100%', height: '100%', minHeight: '380px', ...style }}
     />
   );
-};
+});

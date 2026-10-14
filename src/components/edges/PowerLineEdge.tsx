@@ -34,7 +34,7 @@ function strokeWidthFor(loadingPct: number | undefined): number {
  * button at its midpoint; double-click for the full properties sidebar
  * (R, X, color, label).
  */
-export const PowerLineEdge: React.FC<PdnEdgeProps> = ({
+export const PowerLineEdge: React.FC<PdnEdgeProps> = React.memo(({
   id,
   sourceX,
   sourceY,
@@ -130,7 +130,7 @@ export const PowerLineEdge: React.FC<PdnEdgeProps> = ({
       )}
     </>
   );
-};
+});
 
 export const edgeTypes = {
   powerLine: PowerLineEdge,

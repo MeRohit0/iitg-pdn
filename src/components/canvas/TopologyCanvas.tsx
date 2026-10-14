@@ -194,12 +194,13 @@ const TopologyCanvasInner: React.FC<TopologyCanvasProps> = ({
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [pendingNodeType]);
 
-  // Autosave: every change to the graph is written to localStorage so a
-  // page reload (or reopening the tab later) picks up right where you left
-  // off. Cheap enough at this scale to just save on every change rather
-  // than debouncing.
+  // Autosave: debounced by 400ms so node drag operations run smoothly at 60fps
+  // without stalling the main thread on synchronous localStorage writes.
   useEffect(() => {
-    savePersistedGraph(nodes, edges);
+    const timer = setTimeout(() => {
+      savePersistedGraph(nodes, edges);
+    }, 400);
+    return () => clearTimeout(timer);
   }, [nodes, edges]);
 
   const handleResetToDemo = useCallback(() => {

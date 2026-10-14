@@ -15,7 +15,7 @@ interface BaseNodeProps {
  * at a glance without switching to the Results overlay. Connectable from
  * all four sides — see FourSideHandles.
  */
-export const BaseNode: React.FC<BaseNodeProps> = ({ data, icon, accentColorClass, selected }) => {
+export const BaseNode: React.FC<BaseNodeProps> = React.memo(({ data, icon, accentColorClass, selected }) => {
   const isEnergized = data.result?.isEnergized;
   const stateRing =
     isEnergized === false
@@ -99,4 +99,4 @@ export const BaseNode: React.FC<BaseNodeProps> = ({ data, icon, accentColorClass
       </div>
     </div>
   );
-};
+});
